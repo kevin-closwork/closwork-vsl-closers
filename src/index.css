@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Principales */
+  --primary: #4aab6f;
+  --secondary: #003976;
+  --primary-glow: #5bb87d;
+
+  /* Soporte */
+  --background: #ffffff;
+  --background-subtle: #f8fafc;
+  --background-muted: #f1f5f9;
+  --text-secondary: #6b7280;
+  --border: #e5e7eb;
+  --destructive: #ef4444;
+
+  /* Gradientes */
+  --gradient-hero: linear-gradient(135deg, #003976 0%, #4aab6f 100%);
+  --gradient-primary: linear-gradient(135deg, #4aab6f, #5bb87d);
+  --gradient-secondary: linear-gradient(135deg, #003976, #1a4a7a);
+  --gradient-background: linear-gradient(180deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Manrope', system-ui, -apple-system, sans-serif;
+  background: var(--background);
+  color: var(--secondary);
+}
+
+/* Smooth scroll offset for sticky navbar */
+section[id] {
+  scroll-margin-top: 80px;
+}
+
+/* Gradientes como background-image (Tailwind bg- usa background-color) */
+.bg-gradient-hero {
+  background-image: var(--gradient-hero);
+}
+
+.bg-gradient-secondary {
+  background-image: var(--gradient-secondary);
+}
+
+.bg-gradient-background {
+  background-image: var(--gradient-background);
+}
+
+.bg-gradient-primary {
+  background-image: var(--gradient-primary);
+}
