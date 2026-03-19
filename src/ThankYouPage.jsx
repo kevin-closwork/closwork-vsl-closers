@@ -28,7 +28,7 @@ export default function ThankYouPage() {
             <ol className="space-y-3 text-[var(--secondary)] list-decimal list-inside">
               <li>Entender dónde estás hoy y qué quieres lograr.</li>
               <li>Ver si el programa de certificación es el camino correcto para ti.</li>
-              <li>Si encaja, darte acceso al precio de fundadores antes de que se cierre el cohorte.</li>
+              <li>Si encaja, explicarte cómo empezar con tu certificación y conectarte con empresas reales.</li>
             </ol>
           </div>
           <div className="text-left bg-white rounded-2xl p-8 mb-12 border border-[var(--border)]">

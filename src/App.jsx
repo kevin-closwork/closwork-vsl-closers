@@ -114,8 +114,7 @@ function App() {
     { q: '¿Cuánto puedo ganar como closer?', a: 'Depende de tu esfuerzo y las oportunidades que tomes. Un closer activo en el mercado mexicano puede generar entre $1,500 y $5,000 USD mensuales en comisiones. Algunos más.' },
     { q: '¿Qué pasa después de certificarme?', a: 'Obtienes acceso a la red de empresas de Closwork — empresas reales que ya necesitan closers certificados y están pagando comisiones. No te quedas solo con el conocimiento.' },
     { q: '¿Es un curso pregrabado?', a: 'Es un programa híbrido: módulos grabados para que avances a tu ritmo + sesiones en vivo semanales con Andrés + comunidad activa en Skool + role plays grupales. No estás solo.' },
-    { q: '¿Hay garantía?', a: 'Sí. Si aplicas el método completo y en 90 días no consigues tu primera oportunidad, te devolvemos tu inversión. El riesgo es nuestro, no tuyo.' },
-    { q: '¿Por qué $600 USD si después sube a $1,500?', a: 'Porque los primeros 25 alumnos son los fundadores del programa. Entran a precio especial porque son quienes construyen los primeros casos de éxito con nosotros. Después de eso, el precio refleja el valor real.' },
+    { q: '¿Hay garantía?', a: 'Sí. Si en 90 días no podemos conectarte con una empresa en el sector High Ticket, nosotros asumimos el riesgo — te devolvemos el valor de tu inversión + $200 USD por hacerte perder tu tiempo. El riesgo es nuestro, no tuyo.' },
     { q: '¿Quién es Closwork?', a: 'Closwork es la plataforma que conecta empresas con closers de ventas en LATAM. Es el puente entre tu certificación y las empresas que necesitan tu habilidad. No solo te enseñamos — te colocamos.' },
   ]
 
@@ -159,9 +158,8 @@ function App() {
       {/* Floating CTA */}
       {showFloatingCTA && (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="fixed bottom-6 right-6 z-40">
-          <a href="#agenda" className="flex flex-col items-end gap-1">
-            <span className="text-xs font-medium text-[var(--secondary)] bg-white px-2 py-0.5 rounded-full shadow-sm">25 cupos</span>
-            <span className="inline-flex items-center justify-center px-6 py-3 font-semibold text-white bg-[var(--primary)] hover:bg-[var(--primary-glow)] rounded-2xl shadow-xl transition-all hover:scale-[1.03]">Agenda tu llamada</span>
+          <a href="#agenda" className="inline-flex items-center justify-center px-6 py-3 font-semibold text-white bg-[var(--primary)] hover:bg-[var(--primary-glow)] rounded-2xl shadow-xl transition-all hover:scale-[1.03]">
+            Agenda tu llamada
           </a>
         </motion.div>
       )}
@@ -178,17 +176,17 @@ function App() {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <motion.div variants={heroStagger} initial="hidden" animate="visible">
               <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="inline-block px-4 py-1.5 rounded-full bg-white/20 text-white text-sm font-medium mb-6">
-                Programa de Certificación — Solo 25 cupos disponibles
+                Programa de Certificación en High Ticket Closing
               </motion.div>
               <motion.h1 variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
                 Aprende a cerrar ventas de alto valor y gana en dólares desde donde quieras.
               </motion.h1>
               <motion.p variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="text-lg sm:text-xl text-white/90 mb-8 max-w-xl">
-                El programa de certificación en High Ticket Closing diseñado para el mercado mexicano. Sin experiencia previa. Sin producto propio. Solo una habilidad que paga.
+                Si en 90 días no podemos conectarte con una empresa en el sector High Ticket nosotros asumimos el riesgo… te devolvemos el valor de inversión + $200 USD por hacerte perder tu tiempo.
               </motion.p>
               <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                 <CTAButton size="lg" className="mb-4">Agenda tu llamada gratuita</CTAButton>
-                <p className="text-white/80 text-sm mb-4">Sin compromiso. Una conversación de 15 minutos para ver si es para ti.</p>
+                <p className="text-white/80 text-sm mb-4">Sin compromiso. Una conversación de 30 minutos para ver si es para ti.</p>
                 <p className="text-white/70 text-sm flex items-center gap-2">⭐ Respaldado por Closwork — la red de closers #1 de LATAM</p>
               </motion.div>
             </motion.div>
@@ -213,7 +211,7 @@ function App() {
                   <Clock className="w-6 h-6 text-[var(--primary)]" />
                 </div>
                 <p className="text-2xl lg:text-3xl font-bold text-[var(--secondary)]">
-                  <AnimatedCounter end={10} suffix="+" />
+                  <AnimatedCounter end={50} suffix="+" />
                 </p>
                 <p className="text-sm text-[var(--text-secondary)] mt-1">horas de metodología real</p>
               </div>
@@ -224,7 +222,7 @@ function App() {
                   <BookOpen className="w-6 h-6 text-[var(--primary)]" />
                 </div>
                 <p className="text-2xl lg:text-3xl font-bold text-[var(--secondary)]">
-                  <AnimatedCounter end={9} />
+                  <AnimatedCounter end={10} />
                 </p>
                 <p className="text-sm text-[var(--text-secondary)] mt-1">módulos especializados</p>
               </div>
@@ -235,7 +233,7 @@ function App() {
                   <DollarSign className="w-6 h-6 text-[var(--primary)]" />
                 </div>
                 <p className="text-2xl lg:text-3xl font-bold text-[var(--secondary)]">
-                  <AnimatedCounter end={45} prefix="$" suffix=",000" />
+                  <AnimatedCounter end={85} prefix="$" suffix=",000" />
                 </p>
                 <p className="text-sm text-[var(--text-secondary)] mt-1">USD cerrados en una sola llamada por nuestro instructor</p>
               </div>
@@ -275,7 +273,7 @@ function App() {
           </div>
           <AnimatedSection className="text-center">
             <p className="text-lg font-medium text-[var(--secondary)] max-w-2xl mx-auto">
-              Hay una profesión que ya está pagando comisiones reales en México — y casi nadie la conoce.
+              Hay una profesión que ya está pagando comisiones reales en México y en toda LATAM — y casi nadie la conoce.
             </p>
           </AnimatedSection>
         </div>
@@ -294,7 +292,7 @@ function App() {
               En México hay miles de infoproductores, coaches, agencias y empresas vendiendo programas de $2,000 a $10,000 dólares.
             </p>
             <p className="text-[var(--secondary)] text-lg mb-8">
-              Todos necesitan personas que cierren esas ventas por ellos. Y pagan entre el 10% y el 20% de comisión por cada cierre.
+              Todos necesitan personas que cierren esas ventas por ellos. Y pagan entre el 8% y el 15% de comisión por cada cierre.
             </p>
           </AnimatedSection>
           <AnimatedSection>
@@ -312,7 +310,7 @@ function App() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection>
             <h2 className="text-3xl lg:text-4xl font-bold text-white text-center mb-6">
-              Andrés te explica cómo funciona en menos de 8 minutos
+              Andrés te explica cómo funciona en menos de 6 minutos
             </h2>
             <p className="text-white/80 text-center mb-8">Este video vale más que horas buscando en internet. Dale play.</p>
           </AnimatedSection>
@@ -343,7 +341,7 @@ function App() {
               <AnimatedSection>
                 <ul className="space-y-4 text-[var(--secondary)] mb-8">
                   <li className="flex gap-3"><Check className="w-5 h-5 text-[var(--primary)] flex-shrink-0 mt-0.5" />Closer profesional con años de experiencia en ventas consultivas de alto valor.</li>
-                  <li className="flex gap-3"><Check className="w-5 h-5 text-[var(--primary)] flex-shrink-0 mt-0.5" />Ha cerrado ventas individuales de $3,000 hasta $45,000 dólares.</li>
+                  <li className="flex gap-3"><Check className="w-5 h-5 text-[var(--primary)] flex-shrink-0 mt-0.5" />Ha cerrado ventas individuales de $3,000 hasta $85,000 dólares.</li>
                   <li className="flex gap-3"><Check className="w-5 h-5 text-[var(--primary)] flex-shrink-0 mt-0.5" />Ha entrenado closers que hoy generan comisiones reales en el mercado hispano.</li>
                   <li className="flex gap-3"><Check className="w-5 h-5 text-[var(--primary)] flex-shrink-0 mt-0.5" />Su metodología se basa en una premisa: el cierre no es una técnica, es una conversación de valor.</li>
                 </ul>
@@ -364,7 +362,7 @@ function App() {
           </AnimatedSection>
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              { icon: BookOpen, title: 'Programa completo (~10 horas)', items: ['9 módulos de metodología real', 'Desde mentalidad del closer hasta psicología de persuasión avanzada', 'Scripts adaptados al mercado mexicano (no traducciones de guiones gringos)'] },
+              { icon: BookOpen, title: 'Programa completo (50 horas)', items: ['10 módulos de metodología real', 'Desde mentalidad del closer hasta psicología de persuasión avanzada', 'Scripts adaptados al mercado mexicano (no traducciones de guiones gringos)'] },
               { icon: Users, title: 'Comunidad + Sesiones en vivo', items: ['Acceso a la comunidad de closers en Skool', '1 sesión semanal en vivo con Andrés (60-90 min)', 'Role plays grupales y feedback directo', 'La comunidad ES parte del producto — no es un add-on'] },
               { icon: GraduationCap, title: 'Certificación + Placement', items: ['Certificado digital de Closer Certificado — Closwork', 'Acceso a la red de empresas de Closwork post-certificación', 'Empresas reales que ya pagan comisiones y necesitan closers ahora', 'No te quedas buscando dónde aplicar. Las empresas ya te están esperando.'] },
             ].map((card, i) => (
@@ -394,8 +392,8 @@ function App() {
           </AnimatedSection>
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              { num: '01', title: 'Agenda tu llamada', desc: 'Una conversación de 15 minutos con Andrés para entender dónde estás y si el programa es para ti.', icon: Calendar },
-              { num: '02', title: 'Certifícate como closer', desc: '9 módulos + sesiones en vivo + role plays. En semanas, no en años.', icon: GraduationCap },
+              { num: '01', title: 'Agenda tu llamada', desc: 'Una conversación de 30 minutos con Andrés para entender dónde estás y si el programa es para ti.', icon: Calendar },
+              { num: '02', title: 'Certifícate como closer', desc: '10 módulos + sesiones en vivo + role plays. En semanas, no en años.', icon: GraduationCap },
               { num: '03', title: 'Empieza a cerrar ventas reales', desc: 'Closwork te conecta con empresas que ya necesitan closers certificados. Tú pones las ganas.', icon: Zap },
             ].map((step, i) => (
               <AnimatedSection key={i}>
@@ -485,29 +483,23 @@ function App() {
         </div>
       </section>
 
-      {/* 11. OFERTA + PRICING */}
+      {/* 11. OFERTA */}
       <section id="planes" className="py-20 lg:py-28 bg-gradient-background">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection>
-            <h2 className="text-3xl lg:text-4xl font-bold text-[var(--secondary)] text-center mb-4">Precio de fundadores — Solo para los primeros 25</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold text-[var(--secondary)] text-center mb-4">Todo lo que incluye tu certificación</h2>
           </AnimatedSection>
           <AnimatedSection>
             <div className="relative p-8 rounded-2xl border-2 border-[var(--primary)] bg-white shadow-xl shadow-[var(--primary)]/10">
-              <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-[var(--primary)] text-white text-sm font-semibold rounded-full">Cohorte Fundadores</span>
-              <div className="text-center mb-8">
-                <span className="text-4xl font-bold text-[var(--secondary)]">$600 USD</span>
-                <span className="text-[var(--text-secondary)]"> — Acceso de por vida</span>
-              </div>
               <ul className="space-y-3 mb-8">
-                {['Programa completo (9 módulos, ~10 horas)', 'Comunidad de closers en Skool', 'Sesiones en vivo semanales con Andrés', 'Scripts adaptados al mercado mexicano', 'Certificación oficial Closwork', 'Acceso a la red de empresas de Closwork', 'Acceso de por vida al programa y actualizaciones'].map((f, i) => (
+                {['Programa completo (10 módulos, 50 horas)', 'Comunidad de closers en Skool', 'Sesiones en vivo semanales con Andrés', 'Scripts adaptados al mercado mexicano', 'Certificación oficial Closwork', 'Acceso a la red de empresas de Closwork', 'Acceso de por vida al programa y actualizaciones'].map((f, i) => (
                   <li key={i} className="flex gap-2 text-[var(--secondary)]"><Check className="w-5 h-5 text-[var(--primary)] flex-shrink-0 mt-0.5" />{f}</li>
                 ))}
               </ul>
-              <p className="text-[var(--text-secondary)] text-sm mb-6">Después de los 25 cupos, el precio sube a $1,500 USD. Sin excepciones.</p>
-              <CTAButton size="lg" className="w-full justify-center mb-6">Agenda tu llamada y asegura tu lugar</CTAButton>
+              <CTAButton size="lg" className="w-full justify-center mb-6">Agenda tu llamada de 30 minutos</CTAButton>
               <div className="flex items-start gap-3 p-4 rounded-xl bg-[var(--background-subtle)] border border-[var(--border)]">
                 <Shield className="w-6 h-6 text-[var(--primary)] flex-shrink-0" />
-                <p className="text-sm text-[var(--secondary)]">Si aplicas el método completo y en 90 días no consigues tu primera oportunidad como closer, te regresamos tu inversión completa. Sin preguntas.</p>
+                <p className="text-sm text-[var(--secondary)]">Si en 90 días no podemos conectarte con una empresa en el sector High Ticket, nosotros asumimos el riesgo — te devolvemos el valor de tu inversión + $200 USD por hacerte perder tu tiempo.</p>
               </div>
             </div>
           </AnimatedSection>
@@ -520,14 +512,30 @@ function App() {
           <AnimatedSection>
             <h2 className="text-3xl lg:text-4xl font-bold text-[var(--secondary)] text-center mb-16">Lo que dicen quienes ya empezaron</h2>
           </AnimatedSection>
+          <div className="grid md:grid-cols-3 gap-6 mb-12">
+            {[
+              { name: 'Testimonio 1', videoUrl: 'VIDEO_DRIVE_URL_1' },
+              { name: 'Testimonio 2', videoUrl: 'VIDEO_DRIVE_URL_2' },
+              { name: 'Testimonio 3', videoUrl: 'VIDEO_DRIVE_URL_3' },
+            ].map((testimonial, i) => (
+              <AnimatedSection key={i} delay={i * 0.1}>
+                <div className="rounded-2xl border border-[var(--border)] bg-[var(--background-subtle)] overflow-hidden shadow-sm hover:shadow-md transition-all">
+                  <div className="aspect-video bg-black/10 flex items-center justify-center relative">
+                    {/* TODO: Replace VIDEO_DRIVE_URL with actual Google Drive embed URLs */}
+                    <Play className="w-12 h-12 text-[var(--primary)] opacity-60" />
+                  </div>
+                  <div className="p-4 text-center">
+                    <p className="text-[var(--secondary)] font-semibold">{testimonial.name}</p>
+                  </div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
           <AnimatedSection>
-            <div className="p-8 rounded-2xl border-2 border-dashed border-[var(--border)] bg-[var(--background-subtle)] text-center">
-              <p className="text-[var(--text-secondary)] mb-4">Próximamente — primeros casos de éxito del Cohorte 01</p>
-              <div className="max-w-2xl mx-auto p-6 bg-white rounded-xl border border-[var(--border)]">
-                <Quote className="w-10 h-10 text-[var(--primary)]/50 mx-auto mb-4" />
-                <p className="text-[var(--secondary)] italic">"He entrenado closers que llegaron sin experiencia en ventas y hoy generan comisiones mensuales en dólares con empresas reales."</p>
-                <p className="text-[var(--primary)] font-semibold mt-4">— Andrés Guauque</p>
-              </div>
+            <div className="max-w-2xl mx-auto p-6 bg-white rounded-xl border border-[var(--border)] text-center">
+              <Quote className="w-10 h-10 text-[var(--primary)]/50 mx-auto mb-4" />
+              <p className="text-[var(--secondary)] italic">"He entrenado closers que llegaron sin experiencia en ventas y hoy generan comisiones mensuales en dólares con empresas reales."</p>
+              <p className="text-[var(--primary)] font-semibold mt-4">— Andrés Guauque</p>
             </div>
           </AnimatedSection>
         </div>
@@ -570,10 +578,10 @@ function App() {
               El mercado mexicano de High Ticket Closing no va a seguir esperando.
             </h2>
             <p className="text-xl text-white/90 mb-6">
-              La pregunta es si vas a entrar antes de que esté lleno... o después.
+              La pregunta es si vas a dar el paso ahora... o seguir esperando.
             </p>
-            <CTAButton size="lg" className="mb-6">Agenda tu llamada gratuita</CTAButton>
-            <p className="text-white/70 text-sm">25 cupos a precio de fundadores. Sin compromiso en la llamada.</p>
+            <CTAButton size="lg" className="mb-6">Agenda tu llamada de 30 minutos</CTAButton>
+            <p className="text-white/70 text-sm">Sin compromiso en la llamada. Garantía de inversión + $200 USD.</p>
           </AnimatedSection>
         </div>
       </section>
