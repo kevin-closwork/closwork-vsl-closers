@@ -565,23 +565,46 @@ function App() {
         </div>
       </section>
 
-      {/* 14. CTA FINAL */}
+      {/* 14. CTA FINAL + CALENDARIO */}
       <section id="agenda" className="relative py-24 lg:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-hero" />
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-10 right-10 w-64 h-64 bg-white rounded-full blur-3xl" />
           <div className="absolute bottom-10 left-10 w-48 h-48 bg-[var(--primary-glow)] rounded-full blur-3xl opacity-50" />
         </div>
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <AnimatedSection>
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
               El mercado mexicano de High Ticket Closing no va a seguir esperando.
             </h2>
-            <p className="text-xl text-white/90 mb-6">
+            <p className="text-xl text-white/90 mb-4">
               La pregunta es si vas a dar el paso ahora... o seguir esperando.
             </p>
-            <CTAButton size="lg" className="mb-6">Agenda tu llamada de 30 minutos</CTAButton>
             <p className="text-white/70 text-sm">Sin compromiso en la llamada. Garantía de inversión + $200 USD.</p>
+          </AnimatedSection>
+          <AnimatedSection>
+            <div className="rounded-2xl overflow-hidden shadow-2xl bg-white">
+              <iframe
+                src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3rG58Sh4U2JTyrYUzg8nX9__q22x_R-ByArvu6ZeqIud7lCpmLVJ7V9lWMxo1urWem5q_DS9aq?gv=true"
+                width="100%"
+                height="600"
+                frameBorder="0"
+                style={{ border: 0 }}
+                title="Agenda tu llamada de 30 minutos"
+                className="w-full min-h-[600px]"
+                loading="lazy"
+              />
+            </div>
+            <p className="text-center mt-4">
+              <a
+                href="https://calendar.app.google/rFZ298FNE1WXRP8KA"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/80 hover:text-white text-sm underline underline-offset-2 transition-colors"
+              >
+                ¿No puedes ver el calendario? Haz clic aquí para agendar directamente
+              </a>
+            </p>
           </AnimatedSection>
         </div>
       </section>
