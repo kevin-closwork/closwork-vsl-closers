@@ -192,6 +192,8 @@ function App() {
                 'media-id': 'uwfdvzk86j',
                 aspect: '1.7712177121771218',
                 className: 'w-full block',
+                autoplay: true,
+                'silent-autoplay': 'allow',
               })}
             </motion.div>
             <motion.div variants={heroStagger} initial="hidden" animate="visible" className="text-center lg:text-left max-w-3xl mx-auto lg:mx-0">
