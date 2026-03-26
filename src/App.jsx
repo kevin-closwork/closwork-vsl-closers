@@ -315,10 +315,15 @@ function App() {
             <p className="text-white/80 text-center mb-8">Este video vale más que horas buscando en internet. Dale play.</p>
           </AnimatedSection>
           <AnimatedSection>
-            <div className="aspect-video rounded-2xl bg-black/30 border border-white/20 overflow-hidden flex items-center justify-center mb-8">
-              <motion.button animate={{ scale: [1, 1.05, 1] }} transition={{ duration: 2, repeat: Infinity }} className="w-24 h-24 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors hover:scale-110">
-                <Play className="w-12 h-12 text-white ml-1" fill="white" />
-              </motion.button>
+            <div className="relative w-full rounded-2xl overflow-hidden border border-white/20 shadow-2xl mb-8" style={{ padding: '75% 0 0 0' }}>
+              <iframe
+                src="https://player.vimeo.com/video/1177176345?badge=0&autopause=0&player_id=0&app_id=58479"
+                className="absolute top-0 left-0 w-full h-full"
+                frameBorder={0}
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                title="Vsl A Corregir"
+              />
             </div>
             <div className="text-center">
               <CTAButton size="lg">¿Listo? Agenda tu llamada gratuita</CTAButton>
