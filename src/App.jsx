@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, createElement } from 'react'
 import { motion, useInView } from 'framer-motion'
 import {
   Play,
@@ -174,13 +174,30 @@ function App() {
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
           <div className="flex flex-col gap-10 lg:gap-12">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight text-center max-w-4xl mx-auto"
+            >
+              Aprende a cerrar ventas de alto valor y gana en dólares desde donde quieras.
+            </motion.h1>
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.12 }}
+              className="relative w-full max-w-4xl mx-auto rounded-2xl overflow-hidden border border-white/20 shadow-2xl ring-4 ring-[var(--primary)]/20"
+            >
+              {createElement('wistia-player', {
+                'media-id': 'uwfdvzk86j',
+                aspect: '1.7712177121771218',
+                className: 'w-full block',
+              })}
+            </motion.div>
             <motion.div variants={heroStagger} initial="hidden" animate="visible" className="text-center lg:text-left max-w-3xl mx-auto lg:mx-0">
               <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="inline-block px-4 py-1.5 rounded-full bg-white/20 text-white text-sm font-medium mb-6">
                 Programa de Certificación en High Ticket Closing
               </motion.div>
-              <motion.h1 variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-                Aprende a cerrar ventas de alto valor y gana en dólares desde donde quieras.
-              </motion.h1>
               <motion.p variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="text-lg sm:text-xl text-white/90 mb-8 max-w-xl mx-auto lg:mx-0">
                 Si en 90 días no podemos conectarte con una empresa en el sector High Ticket nosotros asumimos el riesgo… te devolvemos el valor de inversión + $200 USD por hacerte perder tu tiempo.
               </motion.p>
@@ -189,18 +206,6 @@ function App() {
                 <p className="text-white/80 text-sm mb-4">Sin compromiso. Una conversación de 30 minutos para ver si es para ti.</p>
                 <p className="text-white/70 text-sm flex items-center gap-2 justify-center lg:justify-start">⭐ Respaldado por Closwork — la red de closers #1 de LATAM</p>
               </motion.div>
-            </motion.div>
-            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.35 }} className="relative w-full max-w-4xl mx-auto">
-              <div className="relative w-full rounded-2xl overflow-hidden border border-white/20 shadow-2xl ring-4 ring-[var(--primary)]/20" style={{ padding: '75% 0 0 0' }}>
-                <iframe
-                  src="https://player.vimeo.com/video/1177437469?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1"
-                  className="absolute top-0 left-0 w-full h-full"
-                  frameBorder={0}
-                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  title="Vsl Kiona Trazo Negro"
-                />
-              </div>
             </motion.div>
           </div>
         </div>
