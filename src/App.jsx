@@ -173,28 +173,33 @@ function App() {
           <div className="absolute top-1/2 left-1/2 w-64 h-64 border border-white/20 rounded-full -translate-x-1/2 -translate-y-1/2" />
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <motion.div variants={heroStagger} initial="hidden" animate="visible">
+          <div className="flex flex-col gap-10 lg:gap-12">
+            <motion.div variants={heroStagger} initial="hidden" animate="visible" className="text-center lg:text-left max-w-3xl mx-auto lg:mx-0">
               <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="inline-block px-4 py-1.5 rounded-full bg-white/20 text-white text-sm font-medium mb-6">
                 Programa de Certificación en High Ticket Closing
               </motion.div>
               <motion.h1 variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
                 Aprende a cerrar ventas de alto valor y gana en dólares desde donde quieras.
               </motion.h1>
-              <motion.p variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="text-lg sm:text-xl text-white/90 mb-8 max-w-xl">
+              <motion.p variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="text-lg sm:text-xl text-white/90 mb-8 max-w-xl mx-auto lg:mx-0">
                 Si en 90 días no podemos conectarte con una empresa en el sector High Ticket nosotros asumimos el riesgo… te devolvemos el valor de inversión + $200 USD por hacerte perder tu tiempo.
               </motion.p>
               <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                 <CTAButton size="lg" className="mb-4">Agenda tu llamada gratuita</CTAButton>
                 <p className="text-white/80 text-sm mb-4">Sin compromiso. Una conversación de 30 minutos para ver si es para ti.</p>
-                <p className="text-white/70 text-sm flex items-center gap-2">⭐ Respaldado por Closwork — la red de closers #1 de LATAM</p>
+                <p className="text-white/70 text-sm flex items-center gap-2 justify-center lg:justify-start">⭐ Respaldado por Closwork — la red de closers #1 de LATAM</p>
               </motion.div>
             </motion.div>
-            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6, delay: 0.4 }} className="relative">
-              <div className="aspect-video rounded-2xl bg-black/30 backdrop-blur-sm border border-white/20 shadow-2xl overflow-hidden flex items-center justify-center ring-4 ring-[var(--primary)]/20">
-                <motion.button animate={{ scale: [1, 1.05, 1] }} transition={{ duration: 2, repeat: Infinity }} className="w-20 h-20 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors hover:scale-110">
-                  <Play className="w-10 h-10 text-white ml-1" fill="white" />
-                </motion.button>
+            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.35 }} className="relative w-full max-w-4xl mx-auto">
+              <div className="relative w-full rounded-2xl overflow-hidden border border-white/20 shadow-2xl ring-4 ring-[var(--primary)]/20" style={{ padding: '75% 0 0 0' }}>
+                <iframe
+                  src="https://player.vimeo.com/video/1177437469?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1"
+                  className="absolute top-0 left-0 w-full h-full"
+                  frameBorder={0}
+                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  title="Vsl Kiona Trazo Negro"
+                />
               </div>
             </motion.div>
           </div>
@@ -310,21 +315,11 @@ function App() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection>
             <h2 className="text-3xl lg:text-4xl font-bold text-white text-center mb-6">
-              Andrés te explica cómo funciona en menos de 6 minutos
+              ¿Listo para dar el siguiente paso?
             </h2>
-            <p className="text-white/80 text-center mb-8">Este video vale más que horas buscando en internet. Dale play.</p>
+            <p className="text-white/80 text-center mb-8">Agenda una llamada gratuita y vemos juntos si el programa encaja contigo.</p>
           </AnimatedSection>
           <AnimatedSection>
-            <div className="relative w-full rounded-2xl overflow-hidden border border-white/20 shadow-2xl mb-8" style={{ padding: '75% 0 0 0' }}>
-              <iframe
-                src="https://player.vimeo.com/video/1177176345?badge=0&autopause=0&player_id=0&app_id=58479"
-                className="absolute top-0 left-0 w-full h-full"
-                frameBorder={0}
-                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                title="Vsl A Corregir"
-              />
-            </div>
             <div className="text-center">
               <CTAButton size="lg">¿Listo? Agenda tu llamada gratuita</CTAButton>
             </div>
