@@ -360,7 +360,7 @@ function App() {
           </AnimatedSection>
           <div className="grid md:grid-cols-5 gap-12 items-center">
             <AnimatedSection className="md:col-span-2">
-              <div className="aspect-square max-w-xs mx-auto rounded-2xl bg-[var(--background-muted)]" />
+              <img src="https://i.imgur.com/GtWVryc.jpeg" alt="Andrés Guauque" className="aspect-square max-w-xs mx-auto rounded-2xl object-cover" />
             </AnimatedSection>
             <div className="md:col-span-3">
               <AnimatedSection>
