@@ -56,7 +56,13 @@
     <div id="root"></div>
     <script>
       window._wq = window._wq || [];
-      _wq.push({ id: 'uwfdvzk86j', options: { plugin: { 'captions-v1': false, captions: false } } });
+      _wq.push({ id: 'uwfdvzk86j', onReady: function(video) {
+        video.plugin('captions').then(function(c) {
+          if (c && c.turnOff) c.turnOff();
+          if (c && c.disable) c.disable();
+        });
+      }});
+      _wq.push({ id: 'uwfdvzk86j', options: { plugin: { 'captions-v1': { onByDefault: false }, captions: { onByDefault: false } } } });
     </script>
     <script src="https://fast.wistia.com/player.js" async></script>
     <script type="module" src="/src/main.jsx"></script>

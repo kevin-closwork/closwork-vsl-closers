@@ -109,6 +109,24 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  useEffect(() => {
+    const disableCaptions = () => {
+      const W = window.Wistia
+      if (!W || !W.api) return
+      const video = W.api('uwfdvzk86j')
+      if (!video) return
+      video.plugin('captions').then(c => {
+        if (c && c.turnOff) c.turnOff()
+        if (c && c.disable) c.disable()
+      }).catch(() => {})
+    }
+    const interval = setInterval(() => {
+      disableCaptions()
+    }, 500)
+    const timeout = setTimeout(() => clearInterval(interval), 10000)
+    return () => { clearInterval(interval); clearTimeout(timeout) }
+  }, [])
+
   const faqs = [
     { q: '¿Necesito experiencia en ventas?', a: 'No. El programa está diseñado desde cero. De hecho, muchos de los mejores closers que conozco empezaron sin experiencia. Lo que necesitas son ganas de aprender y disposición para practicar.' },
     { q: '¿Cuánto puedo ganar como closer?', a: 'Depende de tu esfuerzo y las oportunidades que tomes. Un closer activo en el mercado mexicano puede generar entre $1,500 y $5,000 USD mensuales en comisiones. Algunos más.' },
