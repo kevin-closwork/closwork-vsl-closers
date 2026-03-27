@@ -16,6 +16,10 @@
         filter: blur(5px);
         padding-top: 56.46%;
       }
+      wistia-player[media-id='uwfdvzk86j'] .w-captions,
+      wistia-player[media-id='uwfdvzk86j'] .w-css-reset .w-captions {
+        display: none !important;
+      }
       wistia-player[media-id='1pf72ewu6m']:not(:defined) {
         background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/1pf72ewu6m/swatch');
         display: block;
@@ -50,12 +54,12 @@
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
     <script>
       window._wq = window._wq || [];
-      _wq.push({ id: 'uwfdvzk86j', options: { plugin: { 'captions-v1': { onByDefault: false } } } });
+      _wq.push({ id: 'uwfdvzk86j', options: { plugin: { 'captions-v1': false, captions: false } } });
     </script>
     <script src="https://fast.wistia.com/player.js" async></script>
+    <script type="module" src="/src/main.jsx"></script>
     <script src="https://fast.wistia.com/embed/uwfdvzk86j.js" async type="module"></script>
     <script src="https://fast.wistia.com/embed/1pf72ewu6m.js" async type="module"></script>
     <script src="https://fast.wistia.com/embed/f4ev94k7ov.js" async type="module"></script>
