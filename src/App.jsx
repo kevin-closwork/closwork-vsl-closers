@@ -520,22 +520,22 @@ function App() {
             <h2 className="text-3xl lg:text-4xl font-bold text-[var(--secondary)] text-center mb-4">Lo que dicen las empresas</h2>
             <p className="text-[var(--text-secondary)] text-center mb-16">Empresas que ya confían en closers certificados por Closwork</p>
           </AnimatedSection>
-          <div className="grid md:grid-cols-2 gap-6">
-            {[
-              { name: 'Testimonio Empresa 1', videoUrl: 'VIDEO_EMPRESA_URL_1' },
-              { name: 'Testimonio Empresa 2', videoUrl: 'VIDEO_EMPRESA_URL_2' },
-            ].map((testimonial, i) => (
-              <AnimatedSection key={i} delay={i * 0.1}>
-                <div className="rounded-2xl border border-[var(--border)] bg-[var(--background-subtle)] overflow-hidden shadow-sm hover:shadow-md transition-all">
-                  <div className="aspect-video bg-black/10 flex items-center justify-center relative">
-                    <Play className="w-12 h-12 text-[var(--primary)] opacity-60" />
-                  </div>
-                  <div className="p-4 text-center">
-                    <p className="text-[var(--secondary)] font-semibold">{testimonial.name}</p>
-                  </div>
-                </div>
-              </AnimatedSection>
-            ))}
+          <div className="grid md:grid-cols-3 gap-6">
+            <AnimatedSection delay={0}>
+              <div className="rounded-2xl border border-[var(--border)] bg-[var(--background-subtle)] overflow-hidden shadow-sm hover:shadow-md transition-all">
+                <wistia-player media-id="22xpkuadcy" aspect="1.7843866171003717"></wistia-player>
+              </div>
+            </AnimatedSection>
+            <AnimatedSection delay={0.1}>
+              <div className="rounded-2xl border border-[var(--border)] bg-[var(--background-subtle)] overflow-hidden shadow-sm hover:shadow-md transition-all">
+                <wistia-player media-id="wg27x4kya7" aspect="1.7843866171003717"></wistia-player>
+              </div>
+            </AnimatedSection>
+            <AnimatedSection delay={0.2}>
+              <div className="rounded-2xl border border-[var(--border)] bg-[var(--background-subtle)] overflow-hidden shadow-sm hover:shadow-md transition-all">
+                <wistia-player media-id="rd06ag3xmc" aspect="1.7843866171003717"></wistia-player>
+              </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
