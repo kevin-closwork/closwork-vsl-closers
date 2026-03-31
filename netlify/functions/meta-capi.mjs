@@ -11,27 +11,38 @@ function hashSHA256(value) {
   return crypto.createHash('sha256').update(normalized).digest('hex')
 }
 
-export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*')
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+export default async function handler(req, context) {
+  if (req.method === 'OPTIONS') {
+    return new Response(null, {
+      status: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type',
+      },
+    })
+  }
 
-  if (req.method === 'OPTIONS') return res.status(200).end()
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' })
+  if (req.method !== 'POST') {
+    return Response.json({ error: 'Method not allowed' }, { status: 405 })
+  }
 
   if (!PIXEL_ID || !ACCESS_TOKEN) {
-    return res.status(500).json({ error: 'Missing Meta CAPI configuration' })
+    return Response.json({ error: 'Missing Meta CAPI configuration' }, { status: 500 })
   }
 
   try {
-    const { event_name, event_id, event_source_url, user_data = {}, custom_data = {} } = req.body
+    const body = await req.json()
+    const { event_name, event_id, event_source_url, user_data = {}, custom_data = {} } = body
 
-    if (!event_name) return res.status(400).json({ error: 'event_name is required' })
+    if (!event_name) {
+      return Response.json({ error: 'event_name is required' }, { status: 400 })
+    }
 
-    const clientIp = req.headers['x-forwarded-for']?.split(',')[0]?.trim()
-      || req.headers['x-real-ip']
-      || req.socket?.remoteAddress
-    const clientUserAgent = req.headers['user-agent']
+    const clientIp = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
+      || req.headers.get('x-nf-client-connection-ip')
+      || req.headers.get('client-ip')
+    const clientUserAgent = req.headers.get('user-agent')
 
     const hashedUserData = {
       client_ip_address: clientIp,
@@ -79,12 +90,16 @@ export default async function handler(req, res) {
 
     if (!response.ok) {
       console.error('Meta CAPI error:', result)
-      return res.status(response.status).json({ error: 'Meta CAPI request failed', details: result })
+      return Response.json({ error: 'Meta CAPI request failed', details: result }, { status: response.status })
     }
 
-    return res.status(200).json({ success: true, ...result })
+    return Response.json({ success: true, ...result })
   } catch (error) {
     console.error('Meta CAPI handler error:', error)
-    return res.status(500).json({ error: 'Internal server error' })
+    return Response.json({ error: 'Internal server error' }, { status: 500 })
   }
+}
+
+export const config = {
+  path: '/api/meta-capi',
 }
