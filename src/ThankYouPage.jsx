@@ -1,7 +1,17 @@
+import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Check } from 'lucide-react'
+import { trackEvent } from './lib/meta-capi'
 
 export default function ThankYouPage() {
+  const tracked = useRef(false)
+
+  useEffect(() => {
+    if (tracked.current) return
+    tracked.current = true
+    trackEvent('Schedule')
+  }, [])
+
   return (
     <div className="min-h-screen bg-white">
       <div className="max-w-2xl mx-auto px-4 py-20">

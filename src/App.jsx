@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, createElement } from 'react'
+import { useState, useEffect, useRef, createElement, useCallback } from 'react'
 import { motion, useInView } from 'framer-motion'
 import {
   Play,
@@ -25,6 +25,7 @@ import {
 } from 'lucide-react'
 
 import ThankYouPage from './ThankYouPage'
+import { trackEvent } from './lib/meta-capi'
 
 // Check if we're on thank you page (redirect from Calendly)
 const isThankYouPage = () => typeof window !== 'undefined' && (window.location.search.includes('thankyou') || window.location.hash === '#gracias')
@@ -95,6 +96,8 @@ function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [openFaq, setOpenFaq] = useState(null)
   const [showThankYou, setShowThankYou] = useState(false)
+  const agendaRef = useRef(null)
+  const leadFiredRef = useRef(false)
 
   useEffect(() => {
     setShowThankYou(isThankYouPage())
@@ -126,6 +129,19 @@ function App() {
     const timeout = setTimeout(() => clearInterval(interval), 10000)
     return () => { clearInterval(interval); clearTimeout(timeout) }
   }, [])
+
+  useEffect(() => {
+    if (!agendaRef.current || leadFiredRef.current) return
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && !leadFiredRef.current) {
+        leadFiredRef.current = true
+        trackEvent('Lead')
+        observer.disconnect()
+      }
+    }, { threshold: 0.3 })
+    observer.observe(agendaRef.current)
+    return () => observer.disconnect()
+  }, [showThankYou])
 
   const faqs = [
     { q: '¿Necesito experiencia en ventas?', a: 'No. El programa está diseñado desde cero. De hecho, muchos de los mejores closers que conozco empezaron sin experiencia. Lo que necesitas son ganas de aprender y disposición para practicar.' },
@@ -612,7 +628,7 @@ function App() {
       </section>
 
       {/* 14. CTA FINAL + CALENDARIO */}
-      <section id="agenda" className="relative py-24 lg:py-32 overflow-hidden">
+      <section ref={agendaRef} id="agenda" className="relative py-24 lg:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-hero" />
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-10 right-10 w-64 h-64 bg-white rounded-full blur-3xl" />
