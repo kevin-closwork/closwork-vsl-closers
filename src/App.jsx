@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, createElement, useCallback } from 'react'
+import { useState, useEffect, useRef, createElement } from 'react'
 import { motion, useInView } from 'framer-motion'
 import {
   Play,
@@ -25,7 +25,7 @@ import {
 } from 'lucide-react'
 
 import ThankYouPage from './ThankYouPage'
-import { trackEvent } from './lib/meta-capi'
+import { trackEvent, persistMetaTracking } from './lib/meta-capi'
 
 // Check if we're on thank you page (redirect from Calendly)
 const isThankYouPage = () => typeof window !== 'undefined' && (window.location.search.includes('thankyou') || window.location.hash === '#gracias')
@@ -97,10 +97,14 @@ function App() {
   const [openFaq, setOpenFaq] = useState(null)
   const [showThankYou, setShowThankYou] = useState(false)
   const agendaRef = useRef(null)
+  const calendarIframeRef = useRef(null)
   const leadFiredRef = useRef(false)
+  const initiateCheckoutFiredRef = useRef(false)
+  const viewContentFiredRef = useRef(false)
 
   useEffect(() => {
     setShowThankYou(isThankYouPage())
+    persistMetaTracking()
   }, [])
 
   useEffect(() => {
@@ -131,16 +135,36 @@ function App() {
   }, [])
 
   useEffect(() => {
-    if (!agendaRef.current || leadFiredRef.current) return
+    if (showThankYou || viewContentFiredRef.current) return
+    viewContentFiredRef.current = true
+    trackEvent('ViewContent')
+  }, [showThankYou])
+
+  useEffect(() => {
+    if (showThankYou || !agendaRef.current || initiateCheckoutFiredRef.current) return
     const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && !leadFiredRef.current) {
-        leadFiredRef.current = true
-        trackEvent('Lead')
+      if (entry.isIntersecting && !initiateCheckoutFiredRef.current) {
+        initiateCheckoutFiredRef.current = true
+        trackEvent('InitiateCheckout')
         observer.disconnect()
       }
     }, { threshold: 0.3 })
     observer.observe(agendaRef.current)
     return () => observer.disconnect()
+  }, [showThankYou])
+
+  useEffect(() => {
+    if (showThankYou || leadFiredRef.current) return
+    const handleBlur = () => {
+      setTimeout(() => {
+        if (document.activeElement === calendarIframeRef.current && !leadFiredRef.current) {
+          leadFiredRef.current = true
+          trackEvent('Lead')
+        }
+      }, 0)
+    }
+    window.addEventListener('blur', handleBlur)
+    return () => window.removeEventListener('blur', handleBlur)
   }, [showThankYou])
 
   const faqs = [
@@ -647,6 +671,7 @@ function App() {
           <AnimatedSection>
             <div className="rounded-2xl overflow-hidden shadow-2xl bg-white">
               <iframe
+                ref={calendarIframeRef}
                 src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3rG58Sh4U2JTyrYUzg8nX9__q22x_R-ByArvu6ZeqIud7lCpmLVJ7V9lWMxo1urWem5q_DS9aq?gv=true"
                 width="100%"
                 height="600"
