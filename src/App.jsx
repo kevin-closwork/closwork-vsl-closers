@@ -172,7 +172,7 @@ function App() {
     { q: '¿Cuánto puedo ganar como closer?', a: 'Depende de tu esfuerzo y las oportunidades que tomes. Un closer activo en el mercado mexicano puede generar entre $1,500 y $5,000 USD mensuales en comisiones. Algunos más.' },
     { q: '¿Qué pasa después de certificarme?', a: 'Obtienes acceso a la red de empresas de Closwork — empresas reales que ya necesitan closers certificados y están pagando comisiones. No te quedas solo con el conocimiento.' },
     { q: '¿Es un curso pregrabado?', a: 'Es un programa híbrido: módulos grabados para que avances a tu ritmo + sesiones en vivo semanales con Andrés + comunidad activa en Skool + role plays grupales. No estás solo.' },
-    { q: '¿Hay garantía?', a: 'Sí. Si en 90 días no podemos conectarte con una empresa en el sector High Ticket, nosotros asumimos el riesgo — te devolvemos el valor de tu inversión + $200 USD por hacerte perder tu tiempo. El riesgo es nuestro, no tuyo.' },
+    { q: '¿Hay garantía?', a: 'Sí. Si en 90 días no podemos conectarte con una empresa en el sector High Ticket, te devolvemos el valor de tu inversión. El riesgo es nuestro, no tuyo.' },
     { q: '¿Quién es Closwork?', a: 'Closwork es la plataforma que conecta empresas con closers de ventas en LATAM. Es el puente entre tu certificación y las empresas que necesitan tu habilidad. No solo te enseñamos — te colocamos.' },
   ]
 
@@ -259,7 +259,7 @@ function App() {
                 Programa de Certificación en High Ticket Closing
               </motion.div>
               <motion.p variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="text-lg sm:text-xl text-white/90 mb-8 max-w-xl mx-auto lg:mx-0">
-                Si en 90 días no podemos conectarte con una empresa en el sector High Ticket nosotros asumimos el riesgo… te devolvemos el valor de inversión + $200 USD por hacerte perder tu tiempo.
+                Si en 90 días no podemos conectarte con una empresa en el sector High Ticket, te devolvemos el valor de tu inversión. Nosotros asumimos el riesgo.
               </motion.p>
               <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                 <CTAButton size="lg" className="mb-4">Agenda tu llamada gratuita</CTAButton>
@@ -564,7 +564,7 @@ function App() {
               <CTAButton size="lg" className="w-full justify-center mb-6">Agenda tu llamada de 30 minutos</CTAButton>
               <div className="flex items-start gap-3 p-4 rounded-xl bg-[var(--background-subtle)] border border-[var(--border)]">
                 <Shield className="w-6 h-6 text-[var(--primary)] flex-shrink-0" />
-                <p className="text-sm text-[var(--secondary)]">Si en 90 días no podemos conectarte con una empresa en el sector High Ticket, nosotros asumimos el riesgo — te devolvemos el valor de tu inversión + $200 USD por hacerte perder tu tiempo.</p>
+                <p className="text-sm text-[var(--secondary)]">Si en 90 días no podemos conectarte con una empresa en el sector High Ticket, te devolvemos el valor de tu inversión. El riesgo es nuestro, no tuyo.</p>
               </div>
             </div>
           </AnimatedSection>
@@ -671,7 +671,7 @@ function App() {
             <p className="text-xl text-white/90 mb-4">
               La pregunta es si vas a dar el paso ahora... o seguir esperando.
             </p>
-            <p className="text-white/70 text-sm">Sin compromiso en la llamada. Garantía de inversión + $200 USD.</p>
+            <p className="text-white/70 text-sm">Sin compromiso en la llamada. Garantía de devolución de inversión.</p>
           </AnimatedSection>
           <AnimatedSection>
             <div className="rounded-2xl overflow-hidden shadow-2xl bg-white">
