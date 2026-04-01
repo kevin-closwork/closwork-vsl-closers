@@ -605,15 +605,20 @@ function App() {
             <h2 className="text-3xl lg:text-4xl font-bold text-[var(--secondary)] text-center mb-4">Lo que dicen nuestros closers</h2>
             <p className="text-[var(--text-secondary)] text-center mb-16">Closers que ya están generando resultados reales</p>
           </AnimatedSection>
-          <div className="grid md:grid-cols-2 gap-6 mb-12">
+          <div className="grid md:grid-cols-3 gap-6 mb-12">
             <AnimatedSection delay={0}>
               <div className="rounded-2xl border border-[var(--border)] bg-white overflow-hidden shadow-sm hover:shadow-md transition-all">
-                <wistia-player media-id="1pf72ewu6m" aspect="1.7777777777777777"></wistia-player>
+                <wistia-player media-id="2v79098752" aspect="1.7843866171003717"></wistia-player>
               </div>
             </AnimatedSection>
             <AnimatedSection delay={0.1}>
               <div className="rounded-2xl border border-[var(--border)] bg-white overflow-hidden shadow-sm hover:shadow-md transition-all">
-                <wistia-player media-id="f4ev94k7ov" aspect="1.7843866171003717"></wistia-player>
+                <wistia-player media-id="5ydnmq4z0y" aspect="1.7777777777777777"></wistia-player>
+              </div>
+            </AnimatedSection>
+            <AnimatedSection delay={0.2}>
+              <div className="rounded-2xl border border-[var(--border)] bg-white overflow-hidden shadow-sm hover:shadow-md transition-all">
+                <wistia-player media-id="z6cqho9fgw" aspect="1.7777777777777777"></wistia-player>
               </div>
             </AnimatedSection>
           </div>
