@@ -12,7 +12,6 @@
     <link rel="preconnect" href="https://embed-ssl.wistia.com" crossorigin>
     <link rel="dns-prefetch" href="https://distillery.wistia.com">
     <link rel="dns-prefetch" href="https://connect.facebook.net">
-    <link rel="preload" href="/assets/hero-vsl-poster.webp" as="image" type="image/webp">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap"></noscript>
     <style>
@@ -100,7 +99,18 @@
     src="https://www.facebook.com/tr?id=757168883861497&ev=PageView&noscript=1"
     /></noscript>
     <div id="root"></div>
-    <!-- Hero Wistia: loaded after idle from React (see loadWistiaHero.js). Testimonial embeds still lazy in App. -->
+    <script>
+      window._wq = window._wq || [];
+      _wq.push({ id: 'uwfdvzk86j', onReady: function(video) {
+        video.plugin('captions').then(function(c) {
+          if (c && c.turnOff) c.turnOff();
+          if (c && c.disable) c.disable();
+        });
+      }});
+      _wq.push({ id: 'uwfdvzk86j', options: { plugin: { 'captions-v1': { onByDefault: false }, captions: { onByDefault: false } } } });
+    </script>
+    <script src="https://fast.wistia.com/player.js" async></script>
     <script type="module" src="/src/main.jsx"></script>
+    <script src="https://fast.wistia.com/embed/uwfdvzk86j.js" async type="module"></script>
   </body>
 </html>

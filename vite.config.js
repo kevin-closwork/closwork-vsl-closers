@@ -5,12 +5,5 @@ export default defineConfig({
   plugins: [react()],
   build: {
     target: 'es2022',
-    rollupOptions: {
-      output: {
-        manualChunks(id) {
-          if (id.includes('node_modules/framer-motion')) return 'motion'
-        },
-      },
-    },
   },
 })

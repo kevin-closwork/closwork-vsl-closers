@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { ensureWistiaPlayerJs } from './wistiaPlayer'
 
-/** Embed scripts for below-the-fold players; hero embed loads via loadWistiaHeroScripts */
+/** Embed scripts for below-the-fold players; hero embed loads from index.html */
 const LAZY_EMBED_IDS = [
   '22xpkuadcy',
   'wg27x4kya7',
