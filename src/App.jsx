@@ -26,6 +26,7 @@ import {
 
 import ThankYouPage from './ThankYouPage'
 import { trackEvent, persistMetaTracking } from './lib/meta-capi'
+import { useLazyWistiaEmbedScripts } from './lib/useLazyWistiaEmbedScripts'
 
 // Check if we're on thank you page (redirect from Calendly)
 const isThankYouPage = () => typeof window !== 'undefined' && (window.location.search.includes('thankyou') || window.location.hash === '#gracias')
@@ -98,6 +99,7 @@ function App() {
   const [showThankYou, setShowThankYou] = useState(false)
   const agendaRef = useRef(null)
   const calendarIframeRef = useRef(null)
+  const testimonialsLazyRef = useRef(null)
   const leadFiredRef = useRef(false)
   const initiateCheckoutFiredRef = useRef(false)
   const viewContentFiredRef = useRef(false)
@@ -106,6 +108,8 @@ function App() {
     setShowThankYou(isThankYouPage())
     persistMetaTracking()
   }, [])
+
+  useLazyWistiaEmbedScripts(testimonialsLazyRef)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -400,7 +404,15 @@ function App() {
           </AnimatedSection>
           <div className="grid md:grid-cols-5 gap-12 items-center">
             <AnimatedSection className="md:col-span-2">
-              <img src="/andres-guauque.webp" alt="Andrés Guauque" className="aspect-square max-w-xs mx-auto rounded-2xl object-cover" />
+              <img
+                src="/assets/andres-guauque.webp"
+                alt="Andrés Guauque"
+                width={320}
+                height={320}
+                loading="lazy"
+                decoding="async"
+                className="aspect-square max-w-xs w-full mx-auto rounded-2xl object-cover"
+              />
             </AnimatedSection>
             <div className="md:col-span-3">
               <AnimatedSection>
@@ -572,7 +584,7 @@ function App() {
       </section>
 
       {/* 12a. TESTIMONIOS EMPRESAS */}
-      <section className="py-20 lg:py-28 bg-white">
+      <section ref={testimonialsLazyRef} className="py-20 lg:py-28 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection>
             <h2 className="text-3xl lg:text-4xl font-bold text-[var(--secondary)] text-center mb-4">Lo que dicen las empresas</h2>
