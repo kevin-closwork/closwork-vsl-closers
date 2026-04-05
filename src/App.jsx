@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, createElement } from 'react'
+import { useState, useEffect, useRef, lazy, Suspense } from 'react'
 import { motion, useInView } from 'framer-motion'
 import {
   Play,
@@ -24,7 +24,9 @@ import {
   Quote,
 } from 'lucide-react'
 
-import ThankYouPage from './ThankYouPage'
+import HeroWistia from './components/HeroWistia'
+
+const ThankYouPage = lazy(() => import('./ThankYouPage'))
 import { trackEvent, persistMetaTracking } from './lib/meta-capi'
 import { useLazyWistiaEmbedScripts } from './lib/useLazyWistiaEmbedScripts'
 
@@ -121,24 +123,6 @@ function App() {
   }, [])
 
   useEffect(() => {
-    const disableCaptions = () => {
-      const W = window.Wistia
-      if (!W || !W.api) return
-      const video = W.api('uwfdvzk86j')
-      if (!video) return
-      video.plugin('captions').then(c => {
-        if (c && c.turnOff) c.turnOff()
-        if (c && c.disable) c.disable()
-      }).catch(() => {})
-    }
-    const interval = setInterval(() => {
-      disableCaptions()
-    }, 500)
-    const timeout = setTimeout(() => clearInterval(interval), 10000)
-    return () => { clearInterval(interval); clearTimeout(timeout) }
-  }, [])
-
-  useEffect(() => {
     if (showThankYou || viewContentFiredRef.current) return
     viewContentFiredRef.current = true
     trackEvent('ViewContent')
@@ -185,7 +169,13 @@ function App() {
     visible: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
   }
 
-  if (showThankYou) return <ThankYouPage />
+  if (showThankYou) {
+    return (
+      <Suspense fallback={<div className="min-h-screen bg-white" />}>
+        <ThankYouPage />
+      </Suspense>
+    )
+  }
 
   return (
     <div className="min-h-screen">
@@ -248,15 +238,9 @@ function App() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.12 }}
-              className="relative w-full max-w-4xl mx-auto rounded-2xl overflow-hidden border border-white/20 shadow-2xl ring-4 ring-[var(--primary)]/20"
+              className="relative w-full max-w-4xl mx-auto"
             >
-              {createElement('wistia-player', {
-                'media-id': 'uwfdvzk86j',
-                aspect: '1.7712177121771218',
-                className: 'w-full block',
-                autoplay: true,
-                'silent-autoplay': 'allow',
-              })}
+              <HeroWistia />
             </motion.div>
             <motion.div variants={heroStagger} initial="hidden" animate="visible" className="text-center lg:text-left max-w-3xl mx-auto lg:mx-0">
               <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} className="inline-block px-4 py-1.5 rounded-full bg-white/20 text-white text-sm font-medium mb-6">

@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://embed-ssl.wistia.com" crossorigin>
     <link rel="dns-prefetch" href="https://distillery.wistia.com">
     <link rel="dns-prefetch" href="https://connect.facebook.net">
+    <link rel="preload" href="/assets/hero-vsl-poster.webp" as="image" type="image/webp">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap"></noscript>
     <style>
@@ -76,14 +77,21 @@
     fbq('track', 'PageView');
     </script>
     <!-- End Meta Pixel Code -->
-    <!-- Microsoft Clarity: after load to reduce impact on first paint -->
+    <!-- Microsoft Clarity: after load + idle (does not compete with first paint / Wistia init) -->
     <script>
     window.addEventListener('load', function () {
-      (function(c,l,a,r,i,t,y){
-          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-      })(window, document, "clarity", "script", "w6hwu3pctd");
+      function injectClarity() {
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "w6hwu3pctd");
+      }
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(injectClarity, { timeout: 5000 });
+      } else {
+        setTimeout(injectClarity, 2000);
+      }
     });
     </script>
   </head>
@@ -92,19 +100,7 @@
     src="https://www.facebook.com/tr?id=757168883861497&ev=PageView&noscript=1"
     /></noscript>
     <div id="root"></div>
-    <script>
-      window._wq = window._wq || [];
-      _wq.push({ id: 'uwfdvzk86j', onReady: function(video) {
-        video.plugin('captions').then(function(c) {
-          if (c && c.turnOff) c.turnOff();
-          if (c && c.disable) c.disable();
-        });
-      }});
-      _wq.push({ id: 'uwfdvzk86j', options: { plugin: { 'captions-v1': { onByDefault: false }, captions: { onByDefault: false } } } });
-    </script>
-    <script src="https://fast.wistia.com/player.js" async></script>
+    <!-- Hero Wistia: loaded after idle from React (see loadWistiaHero.js). Testimonial embeds still lazy in App. -->
     <script type="module" src="/src/main.jsx"></script>
-    <!-- Hero VSL only; other embeds load when testimonial section is near viewport (see App.jsx) -->
-    <script src="https://fast.wistia.com/embed/uwfdvzk86j.js" async type="module"></script>
   </body>
 </html>

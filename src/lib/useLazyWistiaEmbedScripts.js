@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
+import { ensureWistiaPlayerJs } from './wistiaPlayer'
 
-/** Embed scripts for below-the-fold players only; hero (uwfdvzk86j) loads from index.html */
+/** Embed scripts for below-the-fold players; hero embed loads via loadWistiaHeroScripts */
 const LAZY_EMBED_IDS = [
   '22xpkuadcy',
   'wg27x4kya7',
@@ -19,15 +20,19 @@ export function useLazyWistiaEmbedScripts(containerRef) {
     const inject = () => {
       if (done) return
       done = true
-      LAZY_EMBED_IDS.forEach((id) => {
-        if (document.querySelector(`script[data-wistia-embed="${id}"]`)) return
-        const s = document.createElement('script')
-        s.src = `https://fast.wistia.com/embed/${id}.js`
-        s.async = true
-        s.type = 'module'
-        s.dataset.wistiaEmbed = id
-        document.body.appendChild(s)
-      })
+      ensureWistiaPlayerJs()
+        .then(() => {
+          LAZY_EMBED_IDS.forEach((id) => {
+            if (document.querySelector(`script[data-wistia-embed="${id}"]`)) return
+            const s = document.createElement('script')
+            s.src = `https://fast.wistia.com/embed/${id}.js`
+            s.async = true
+            s.type = 'module'
+            s.dataset.wistiaEmbed = id
+            document.body.appendChild(s)
+          })
+        })
+        .catch(() => {})
     }
 
     const obs = new IntersectionObserver(
