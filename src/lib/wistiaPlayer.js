@@ -30,3 +30,26 @@ export function ensureWistiaPlayerJs() {
 
   return playerPromise
 }
+
+const EMBED_BASE = 'https://fast.wistia.com/embed'
+
+/** Loads the embed module for a media id (after player.js). */
+export function ensureWistiaEmbedModule(mediaId) {
+  return ensureWistiaPlayerJs().then(
+    () =>
+      new Promise((resolve) => {
+        if (document.querySelector(`script[data-wistia-embed="${mediaId}"]`)) {
+          resolve()
+          return
+        }
+        const s = document.createElement('script')
+        s.src = `${EMBED_BASE}/${mediaId}.js`
+        s.async = true
+        s.type = 'module'
+        s.dataset.wistiaEmbed = mediaId
+        s.onload = () => resolve()
+        s.onerror = () => resolve()
+        document.body.appendChild(s)
+      })
+  )
+}
