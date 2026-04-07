@@ -133,7 +133,7 @@ function App() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 lg:items-start">
             <span className="justify-self-center lg:justify-self-start lg:col-start-1 lg:row-start-1 inline-flex px-3 py-1 rounded-full bg-white/20 text-white text-xs font-medium">
-              Programa de Certificación · 25 cupos
+              Programa de Certificación en High Ticket Closing
             </span>
 
             <motion.h1
@@ -162,7 +162,7 @@ function App() {
                 Agenda tu llamada gratuita
               </TrackedAgendaLink>
               <p className="text-center lg:text-left text-xs text-white/70 w-full max-w-[480px]">
-                Sin compromiso. 15 minutos. Sin presión.
+                Sin compromiso. Sin presión.
               </p>
               <p className="text-center lg:text-left text-sm text-white/85 flex items-center gap-2 justify-center lg:justify-start">
                 ⭐ Respaldado por Closwork — la red de closers #1 de LATAM
