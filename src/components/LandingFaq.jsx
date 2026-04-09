@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { ChevronDown } from 'lucide-react'
-import { motion } from 'framer-motion'
 
 const FAQS = [
   { q: '¿Necesito experiencia en ventas?', a: 'No. El programa está diseñado desde cero. Lo que necesitas son ganas de aprender y disposición para practicar.' },
@@ -30,14 +29,14 @@ export default function LandingFaq() {
                 {faq.q}
                 <ChevronDown className={`w-5 h-5 flex-shrink-0 ml-2 transition-transform duration-300 ${openFaq === i ? 'rotate-180' : ''}`} />
               </button>
-              <motion.div
-                initial={false}
-                animate={{ height: openFaq === i ? 'auto' : 0 }}
-                transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-                className="overflow-hidden"
+              <div
+                className="grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none"
+                style={{ gridTemplateRows: openFaq === i ? '1fr' : '0fr' }}
               >
-                <p className="px-5 pb-5 text-sm text-[var(--text-secondary)] leading-relaxed">{faq.a}</p>
-              </motion.div>
+                <div className="overflow-hidden">
+                  <p className="px-5 pb-5 text-sm text-[var(--text-secondary)] leading-relaxed">{faq.a}</p>
+                </div>
+              </div>
             </div>
           ))}
         </div>

@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react'
-import { motion } from 'framer-motion'
 import { Check } from 'lucide-react'
 import { trackEvent } from './lib/meta-capi'
 
@@ -15,12 +14,8 @@ export default function ThankYouPage() {
   return (
     <div className="min-h-screen bg-white">
       <div className="max-w-2xl mx-auto px-4 py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center"
-        >
+        <div className="text-center opacity-0 animate-[tyFade_0.5s_ease-out_forwards]">
+          <style>{`@keyframes tyFade { to { opacity: 1; } }`}</style>
           <div className="w-16 h-16 rounded-2xl bg-[var(--primary)]/10 flex items-center justify-center mx-auto mb-8">
             <Check className="w-8 h-8 text-[var(--primary)]" />
           </div>
@@ -52,7 +47,7 @@ export default function ThankYouPage() {
           <p className="text-[var(--text-secondary)] italic">
             Nos vemos pronto. — Andrés Guauque · Closwork
           </p>
-        </motion.div>
+        </div>
       </div>
     </div>
   )
