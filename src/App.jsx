@@ -75,11 +75,6 @@ function App() {
 
   if (showThankYou) return <ThankYouPage />
 
-  const bigCtaClass =
-    'inline-flex items-center justify-center w-full max-w-[480px] min-h-[56px] sm:min-h-[64px] px-6 rounded-2xl text-base sm:text-[18px] font-semibold text-white bg-[var(--primary)] hover:bg-[var(--primary-glow)] transition-all hover:scale-[1.02] shadow-[0_12px_40px_rgba(74,171,111,0.45)]'
-
-  const stepTitle = 'text-lg sm:text-xl font-bold text-[var(--primary)] tracking-tight'
-
   return (
     <div className="min-h-screen">
       <style>{`
@@ -149,42 +144,24 @@ function App() {
               devolvemos el 100% de tu inversión y te damos <span className="text-white">$200 USD</span> por tu tiempo.
             </h1>
             <p className="text-white/80 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
-              Tres pasos: mira el video, agenda una llamada breve y elige tu horario. Sin presión.
+              Dos pasos: mira el video y elige tu horario en el calendario. Sin presión.
             </p>
           </div>
 
           {/* Paso 1 */}
-          <div className="space-y-4">
-            <h2 className={stepTitle}>Paso 1 · Mira el video</h2>
-            <p className="text-white/85 text-sm">
+          <div className="space-y-4 pt-2 border-t border-white/15">
+            <h2 className="text-2xl sm:text-3xl lg:text-[2rem] font-bold text-white tracking-tight">
+              Paso 1 · Mira el video
+            </h2>
+            <p className="text-white text-base sm:text-lg leading-relaxed">
               Conoce cómo funciona el programa y si encaja contigo.
             </p>
             <WistiaHeroFacade />
           </div>
-
-          {/* Paso 2 */}
-          <div className="space-y-4 pt-2 border-t border-white/15">
-            <h2 className={stepTitle}>Paso 2 · Agenda tu llamada</h2>
-            <p className="text-white/90 text-sm sm:text-base leading-relaxed">
-              Hablamos contigo para conocerte y ver si puedes ser parte de los closers que estamos formando.{' '}
-              <span className="text-white font-medium">No te obligamos a nada.</span>
-            </p>
-            <TrackedAgendaLink
-              location="hero_paso2"
-              onClick={(e) => {
-                e.preventDefault()
-                scrollToAgenda()
-              }}
-              href="#agenda"
-              className={`${bigCtaClass} mx-auto`}
-            >
-              Ir al calendario
-            </TrackedAgendaLink>
-          </div>
         </div>
       </section>
 
-      {/* Paso 3 · Calendario */}
+      {/* Paso 2 · Calendario */}
       <section ref={agendaRef} id="agenda" className="relative py-14 lg:py-20 overflow-hidden scroll-mt-20">
         <div className="absolute inset-0 bg-gradient-hero" />
         <div className="absolute inset-0 opacity-15 pointer-events-none">
@@ -192,7 +169,7 @@ function App() {
         </div>
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
           <div className="text-center">
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">Paso 3 · Elige día y hora</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">Paso 2 · Elige día y hora</h2>
             <p className="text-white/80 text-sm">Las horas se muestran en tu zona horaria local.</p>
           </div>
           <AgendaCalendar iframeRef={calendarIframeRef} />
