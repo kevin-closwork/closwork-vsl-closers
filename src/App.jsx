@@ -3,17 +3,35 @@ import ThankYouPage from './ThankYouPage'
 import WistiaHeroFacade from './components/WistiaHeroFacade.jsx'
 import TrackedAgendaLink from './components/TrackedAgendaLink.jsx'
 import { persistMetaTracking, trackEvent } from './lib/meta-capi'
-import { useDeferBelowFold } from './hooks/useDeferBelowFold'
+import { useInViewOnce } from './hooks/useInViewOnce'
 
-const LandingBelowFold = lazy(() => import('./components/LandingBelowFold.jsx'))
 const LandingFooter = lazy(() => import('./components/LandingFooter.jsx'))
 
 const isThankYouPage = () =>
   typeof window !== 'undefined' &&
   (window.location.search.includes('thankyou') || window.location.hash === '#gracias')
 
-function SectionSkeleton() {
-  return <div className="min-h-[320px] bg-[var(--background-subtle)] animate-pulse" aria-hidden />
+function AgendaCalendar({ iframeRef }) {
+  const [wrapRef, inView] = useInViewOnce()
+  return (
+    <div ref={wrapRef} className="rounded-2xl overflow-hidden shadow-2xl bg-white min-h-[520px] sm:min-h-[600px]">
+      {inView ? (
+        <iframe
+          ref={iframeRef}
+          src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3rG58Sh4U2JTyrYUzg8nX9__q22x_R-ByArvu6ZeqIud7lCpmLVJ7V9lWMxo1urWem5q_DS9aq?gv=true"
+          width="100%"
+          height="600"
+          frameBorder={0}
+          style={{ border: 0 }}
+          title="Agenda tu llamada"
+          className="w-full min-h-[520px] sm:min-h-[600px]"
+          loading="lazy"
+        />
+      ) : (
+        <div className="w-full min-h-[520px] sm:min-h-[600px] bg-slate-100 animate-pulse" aria-hidden />
+      )}
+    </div>
+  )
 }
 
 function App() {
@@ -23,7 +41,6 @@ function App() {
   const heroRef = useRef(null)
   const agendaRef = useRef(null)
   const calendarIframeRef = useRef(null)
-  const loadBelowFold = useDeferBelowFold({ idleTimeoutMs: 2000 })
 
   useEffect(() => {
     setShowThankYou(isThankYouPage())
@@ -59,7 +76,9 @@ function App() {
   if (showThankYou) return <ThankYouPage />
 
   const bigCtaClass =
-    'inline-flex items-center justify-center w-full max-w-[480px] min-h-[64px] px-6 rounded-2xl text-[18px] font-semibold text-white bg-[var(--primary)] hover:bg-[var(--primary-glow)] transition-all hover:scale-[1.02] shadow-[0_12px_40px_rgba(74,171,111,0.45)]'
+    'inline-flex items-center justify-center w-full max-w-[480px] min-h-[56px] sm:min-h-[64px] px-6 rounded-2xl text-base sm:text-[18px] font-semibold text-white bg-[var(--primary)] hover:bg-[var(--primary-glow)] transition-all hover:scale-[1.02] shadow-[0_12px_40px_rgba(74,171,111,0.45)]'
+
+  const stepTitle = 'text-lg sm:text-xl font-bold text-[var(--primary)] tracking-tight'
 
   return (
     <div className="min-h-screen">
@@ -111,62 +130,84 @@ function App() {
         </div>
       )}
 
-      <section ref={heroRef} className="relative overflow-hidden pt-14 sm:pt-16">
+      {/* Bloque principal: promesa + 3 pasos */}
+      <section ref={heroRef} className="relative overflow-hidden pt-14 sm:pt-16 pb-12 lg:pb-16">
         <div className="absolute inset-0 bg-gradient-hero min-h-full" />
         <div className="absolute inset-0 opacity-20 pointer-events-none">
           <div className="absolute top-20 left-10 w-72 h-72 bg-white rounded-full blur-3xl" />
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-[var(--primary-glow)] rounded-full blur-3xl opacity-50" />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 lg:items-start">
-            <span className="justify-self-center lg:justify-self-start lg:col-start-1 lg:row-start-1 inline-flex px-3 py-1 rounded-full bg-white/20 text-white text-xs font-medium">
-              Programa de Certificación en High Ticket Closing
+        <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14 space-y-10">
+          <div className="text-center space-y-4">
+            <span className="inline-flex px-3 py-1 rounded-full bg-white/15 text-white/95 text-xs font-medium">
+              Certificación High Ticket Closing · Closwork
             </span>
-
-            <h1 className="hero-title-in text-3xl sm:text-4xl lg:text-[2.45rem] font-bold text-white leading-tight text-center lg:text-left max-w-xl mx-auto lg:mx-0 lg:col-start-1 lg:row-start-2">
-              Aprende a cerrar ventas de alto valor y gana en dólares desde donde quieras
+            <h1 className="hero-title-in text-xl sm:text-2xl lg:text-[1.65rem] font-bold text-white leading-snug">
+              Te formamos como closer High Ticket y te conectamos con empresas para que generes entre{' '}
+              <span className="text-white">$2,000 y $6,000 USD al mes</span> en menos de 90 días. Si no lo logramos,
+              devolvemos el 100% de tu inversión y te damos <span className="text-white">$200 USD</span> por tu tiempo.
             </h1>
+            <p className="text-white/80 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+              Tres pasos: mira el video, agenda una llamada breve y elige tu horario. Sin presión.
+            </p>
+          </div>
 
-            <div className="lg:col-start-2 lg:row-start-1 lg:row-span-3 lg:self-start lg:sticky lg:top-20">
-              <WistiaHeroFacade />
-            </div>
+          {/* Paso 1 */}
+          <div className="space-y-4">
+            <h2 className={stepTitle}>Paso 1 · Mira el video</h2>
+            <p className="text-white/85 text-sm">
+              Conoce cómo funciona el programa y si encaja contigo.
+            </p>
+            <WistiaHeroFacade />
+          </div>
 
-            <div className="flex flex-col items-center lg:items-start gap-3 lg:col-start-1 lg:row-start-3">
-              <TrackedAgendaLink
-                location="hero_primary"
-                onClick={(e) => {
-                  e.preventDefault()
-                  scrollToAgenda()
-                }}
-                href="#agenda"
-                className={`${bigCtaClass} mx-auto lg:mx-0`}
-              >
-                Agenda tu llamada gratuita
-              </TrackedAgendaLink>
-              <p className="text-center lg:text-left text-xs text-white/70 w-full max-w-[480px]">
-                Sin compromiso. Sin presión.
-              </p>
-              <p className="text-center lg:text-left text-sm text-white/85 flex items-center gap-2 justify-center lg:justify-start">
-                ⭐ Respaldado por Closwork — la red de closers #1 de LATAM
-              </p>
-            </div>
+          {/* Paso 2 */}
+          <div className="space-y-4 pt-2 border-t border-white/15">
+            <h2 className={stepTitle}>Paso 2 · Agenda tu llamada</h2>
+            <p className="text-white/90 text-sm sm:text-base leading-relaxed">
+              Hablamos contigo para conocerte y ver si puedes ser parte de los closers que estamos formando.{' '}
+              <span className="text-white font-medium">No te obligamos a nada.</span>
+            </p>
+            <TrackedAgendaLink
+              location="hero_paso2"
+              onClick={(e) => {
+                e.preventDefault()
+                scrollToAgenda()
+              }}
+              href="#agenda"
+              className={`${bigCtaClass} mx-auto`}
+            >
+              Ir al calendario
+            </TrackedAgendaLink>
           </div>
         </div>
       </section>
 
-      {loadBelowFold ? (
-        <Suspense fallback={<SectionSkeleton />}>
-          <LandingBelowFold
-            ref={agendaRef}
-            bigCtaClass={bigCtaClass}
-            scrollToAgenda={scrollToAgenda}
-            calendarIframeRef={calendarIframeRef}
-          />
-        </Suspense>
-      ) : (
-        <SectionSkeleton />
-      )}
+      {/* Paso 3 · Calendario */}
+      <section ref={agendaRef} id="agenda" className="relative py-14 lg:py-20 overflow-hidden scroll-mt-20">
+        <div className="absolute inset-0 bg-gradient-hero" />
+        <div className="absolute inset-0 opacity-15 pointer-events-none">
+          <div className="absolute top-10 right-10 w-64 h-64 bg-white rounded-full blur-3xl" />
+        </div>
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+          <div className="text-center">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">Paso 3 · Elige día y hora</h2>
+            <p className="text-white/80 text-sm">Las horas se muestran en tu zona horaria local.</p>
+          </div>
+          <AgendaCalendar iframeRef={calendarIframeRef} />
+          <p className="text-center">
+            <a
+              href="https://calendar.app.google/rFZ298FNE1WXRP8KA"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/85 hover:text-white text-sm underline underline-offset-2"
+            >
+              ¿No ves el calendario? Abre el enlace directo
+            </a>
+          </p>
+        </div>
+      </section>
 
       <Suspense fallback={<div className="h-24 bg-[var(--secondary)]" />}>
         <LandingFooter />
