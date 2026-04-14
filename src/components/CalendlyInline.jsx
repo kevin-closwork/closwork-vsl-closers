@@ -1,74 +1,42 @@
-import { useEffect, useRef } from 'react'
-import { useInViewOnce } from '../hooks/useInViewOnce'
+import { useEffect, useState } from 'react'
 
+/** Enlace público (fallback en nueva pestaña). */
 export const CALENDLY_INLINE_URL =
   'https://calendly.com/andres-closwork/30min?hide_gdpr_banner=1'
 
-const WIDGET_SCRIPT_SRC = 'https://assets.calendly.com/assets/external/widget.js'
+const CALENDLY_PATH = 'andres-closwork/30min'
 
-function loadCalendlyScript() {
-  if (typeof window === 'undefined') return Promise.reject(new Error('no window'))
-  if (window.Calendly) return Promise.resolve()
-
-  const existing = document.querySelector(`script[src="${WIDGET_SCRIPT_SRC}"]`)
-  if (existing) {
-    return new Promise((resolve, reject) => {
-      if (window.Calendly) {
-        resolve()
-        return
-      }
-      existing.addEventListener('load', () => resolve())
-      existing.addEventListener('error', () => reject(new Error('Calendly script error')))
-    })
-  }
-
-  return new Promise((resolve, reject) => {
-    const s = document.createElement('script')
-    s.src = WIDGET_SCRIPT_SRC
-    s.async = true
-    s.onload = () => resolve()
-    s.onerror = () => reject(new Error('Calendly script failed to load'))
-    document.body.appendChild(s)
-  })
-}
-
+/**
+ * Embed inline oficial (iframe). Más fiable que initInlineWidget + script en React.
+ * @see https://help.calendly.com/hc/en-us/articles/223147027-Embed-options-overview
+ */
 export default function CalendlyInline() {
-  const [wrapRef, inView] = useInViewOnce()
-  const hostRef = useRef(null)
-  const didInit = useRef(false)
+  const [embedSrc, setEmbedSrc] = useState('')
 
   useEffect(() => {
-    if (!inView || didInit.current) return
-
-    let cancelled = false
-
-    loadCalendlyScript()
-      .then(() => {
-        if (cancelled || didInit.current) return
-        const host = hostRef.current
-        if (!host || !window.Calendly) return
-        window.Calendly.initInlineWidget({
-          url: CALENDLY_INLINE_URL,
-          parentElement: host,
-        })
-        didInit.current = true
-      })
-      .catch(() => {})
-
-    return () => {
-      cancelled = true
-    }
-  }, [inView])
+    const host = window.location.hostname || 'localhost'
+    const q = new URLSearchParams({
+      embed_domain: host,
+      embed_type: 'Inline',
+      hide_gdpr_banner: '1',
+    })
+    setEmbedSrc(`https://calendly.com/${CALENDLY_PATH}?${q.toString()}`)
+  }, [])
 
   return (
-    <div ref={wrapRef} className="rounded-2xl overflow-hidden shadow-2xl bg-white min-h-[520px] sm:min-h-[700px]">
-      {!inView ? (
+    <div className="rounded-2xl overflow-hidden shadow-2xl bg-white min-h-[520px] sm:min-h-[700px]">
+      {!embedSrc ? (
         <div className="w-full min-h-[520px] sm:min-h-[700px] bg-slate-100 animate-pulse" aria-hidden />
       ) : (
-        <div
-          ref={hostRef}
-          className="calendly-inline-widget w-full min-w-[320px] min-h-[700px]"
-          style={{ minWidth: 320, height: 700 }}
+        <iframe
+          src={embedSrc}
+          title="Agenda tu llamada — Calendly"
+          width="100%"
+          height={700}
+          frameBorder={0}
+          className="block w-full min-w-[320px] border-0 bg-white"
+          style={{ minHeight: 700 }}
+          loading="lazy"
         />
       )}
     </div>
