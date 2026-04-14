@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { Check, Quote } from 'lucide-react'
-import { trackEvent } from './lib/meta-capi'
+import { trackScheduleOnce } from './lib/meta-capi'
 import WistiaTestimonialGrid from './components/WistiaTestimonialGrid.jsx'
 
 const TESTIMONIOS_EMPRESAS = [
@@ -16,12 +16,8 @@ const TESTIMONIOS_CLOSERS = [
 ]
 
 export default function ThankYouPage() {
-  const tracked = useRef(false)
-
   useEffect(() => {
-    if (tracked.current) return
-    tracked.current = true
-    trackEvent('Schedule')
+    trackScheduleOnce()
   }, [])
 
   return (

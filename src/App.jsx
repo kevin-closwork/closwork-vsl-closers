@@ -2,37 +2,16 @@ import { lazy, Suspense, useState, useEffect, useRef } from 'react'
 import ThankYouPage from './ThankYouPage'
 import WistiaHeroFacade from './components/WistiaHeroFacade.jsx'
 import TrackedAgendaLink from './components/TrackedAgendaLink.jsx'
-import { persistMetaTracking, trackEvent } from './lib/meta-capi'
-import { useInViewOnce } from './hooks/useInViewOnce'
+import CalendlyInline, { CALENDLY_INLINE_URL } from './components/CalendlyInline.jsx'
+import { persistMetaTracking, trackScheduleOnce } from './lib/meta-capi'
 
 const LandingFooter = lazy(() => import('./components/LandingFooter.jsx'))
+
+const CALENDLY_MESSAGE_ORIGINS = new Set(['https://calendly.com', 'https://cal.calendly.com'])
 
 const isThankYouPage = () =>
   typeof window !== 'undefined' &&
   (window.location.search.includes('thankyou') || window.location.hash === '#gracias')
-
-function AgendaCalendar({ iframeRef }) {
-  const [wrapRef, inView] = useInViewOnce()
-  return (
-    <div ref={wrapRef} className="rounded-2xl overflow-hidden shadow-2xl bg-white min-h-[520px] sm:min-h-[600px]">
-      {inView ? (
-        <iframe
-          ref={iframeRef}
-          src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3rG58Sh4U2JTyrYUzg8nX9__q22x_R-ByArvu6ZeqIud7lCpmLVJ7V9lWMxo1urWem5q_DS9aq?gv=true"
-          width="100%"
-          height="600"
-          frameBorder={0}
-          style={{ border: 0 }}
-          title="Agenda tu llamada"
-          className="w-full min-h-[520px] sm:min-h-[600px]"
-          loading="lazy"
-        />
-      ) : (
-        <div className="w-full min-h-[520px] sm:min-h-[600px] bg-slate-100 animate-pulse" aria-hidden />
-      )}
-    </div>
-  )
-}
 
 function App() {
   const [navbarSolid, setNavbarSolid] = useState(false)
@@ -40,7 +19,6 @@ function App() {
   const [showThankYou, setShowThankYou] = useState(false)
   const heroRef = useRef(null)
   const agendaRef = useRef(null)
-  const calendarIframeRef = useRef(null)
 
   useEffect(() => {
     setShowThankYou(isThankYouPage())
@@ -61,9 +39,9 @@ function App() {
 
   useEffect(() => {
     const handleCalendlyEvent = (e) => {
-      if (e.origin !== 'https://calendly.com') return
+      if (!CALENDLY_MESSAGE_ORIGINS.has(e.origin)) return
       if (e.data?.event !== 'calendly.event_scheduled') return
-      trackEvent('Schedule', {}, { content_name: 'Llamada Certificacion HTC' })
+      trackScheduleOnce()
     }
     window.addEventListener('message', handleCalendlyEvent)
     return () => window.removeEventListener('message', handleCalendlyEvent)
@@ -172,15 +150,15 @@ function App() {
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">Paso 2 · Elige día y hora</h2>
             <p className="text-white/80 text-sm">Las horas se muestran en tu zona horaria local.</p>
           </div>
-          <AgendaCalendar iframeRef={calendarIframeRef} />
+          <CalendlyInline />
           <p className="text-center">
             <a
-              href="https://calendar.app.google/rFZ298FNE1WXRP8KA"
+              href={CALENDLY_INLINE_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="text-white/85 hover:text-white text-sm underline underline-offset-2"
             >
-              ¿No ves el calendario? Abre el enlace directo
+              ¿No ves el calendario? Abre Calendly en una pestaña nueva
             </a>
           </p>
         </div>

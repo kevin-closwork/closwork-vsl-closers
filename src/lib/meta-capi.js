@@ -16,9 +16,26 @@ function buildFbcFromUrl() {
   return `fb.1.${Date.now()}.${fbclid}`
 }
 
+const SCHEDULE_SENT_KEY = 'cw_meta_schedule_sent'
+
+/**
+ * Schedule (Pixel + CAPI) una sola vez por sesión: evita duplicar si Calendly envía postMessage y además redirige a ?thankyou.
+ */
+export function trackScheduleOnce(customData = {}) {
+  try {
+    if (sessionStorage.getItem(SCHEDULE_SENT_KEY)) return Promise.resolve()
+    sessionStorage.setItem(SCHEDULE_SENT_KEY, '1')
+  } catch {}
+  return trackEvent(
+    'Schedule',
+    {},
+    { content_name: 'Llamada Certificacion HTC', ...customData }
+  )
+}
+
 /**
  * Persist fbclid, _fbp, and _fbc in sessionStorage so they survive
- * the Google Calendar redirect back to ?thankyou.
+ * redirect back to ?thankyou (p. ej. tras reservar en Calendly).
  */
 export function persistMetaTracking() {
   const fbp = getCookie('_fbp')
