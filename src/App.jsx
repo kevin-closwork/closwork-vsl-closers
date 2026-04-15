@@ -117,7 +117,7 @@ function App() {
             <span className="inline-flex px-3 py-1 rounded-full bg-white/15 text-white/95 text-xs font-medium">
               Certificación High Ticket Closing · Closwork
             </span>
-            <h1 className="hero-title-in text-xl sm:text-2xl lg:text-[1.65rem] font-bold text-white leading-snug">
+            <h1 className="hero-title-in text-2xl sm:text-3xl lg:text-[1.9rem] font-bold text-white leading-snug">
               <span className="block">Cierra ventas High Ticket desde tu casa.</span>
               <span className="block mt-2 sm:mt-3">
                 Nosotros te formamos y te conectamos con la empresa.
@@ -128,17 +128,6 @@ function App() {
               <span className="text-white font-semibold">$2,000 y $6,000 USD</span> al mes en comisiones.
               Hispanohablantes, sin experiencia previa.
             </p>
-            <div
-              className="flex items-start sm:items-center justify-center gap-3 text-left sm:text-center max-w-xl mx-auto rounded-2xl border border-white/20 bg-white/[0.08] px-4 py-3.5 shadow-sm shadow-black/10"
-              role="note"
-            >
-              <Shield className="h-5 w-5 shrink-0 text-[var(--primary)] mt-0.5 sm:mt-0" aria-hidden />
-              <p className="text-sm sm:text-[0.9375rem] text-white/95 leading-snug">
-                <span className="font-semibold text-white">Garantía:</span> si no te conectamos con una empresa,
-                <br />
-                te devolvemos el 100% + <span className="text-white font-semibold">$200 USD</span>.
-              </p>
-            </div>
             <p className="text-white/80 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
               Dos pasos: mira el video y elige tu horario en el calendario. Sin presión.
             </p>
@@ -153,6 +142,17 @@ function App() {
               Conoce cómo funciona el programa y si encaja contigo.
             </p>
             <WistiaHeroFacade />
+            <div
+              className="flex items-start sm:items-center justify-center gap-3 text-left sm:text-center max-w-xl mx-auto rounded-2xl border border-white/20 bg-white/[0.08] px-4 py-3.5 shadow-sm shadow-black/10"
+              role="note"
+            >
+              <Shield className="h-5 w-5 shrink-0 text-[var(--primary)] mt-0.5 sm:mt-0" aria-hidden />
+              <p className="text-sm sm:text-[0.9375rem] text-white/95 leading-snug">
+                <span className="font-semibold text-white">Garantía:</span> si no te conectamos con una empresa,
+                <br />
+                te devolvemos el 100% + <span className="text-white font-semibold">$200 USD</span>.
+              </p>
+            </div>
           </div>
         </div>
       </section>
