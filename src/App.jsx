@@ -1,4 +1,5 @@
 import { lazy, Suspense, useState, useEffect, useRef } from 'react'
+import { Shield } from 'lucide-react'
 import ThankYouPage from './ThankYouPage'
 import WistiaHeroFacade from './components/WistiaHeroFacade.jsx'
 import TrackedAgendaLink from './components/TrackedAgendaLink.jsx'
@@ -117,11 +118,27 @@ function App() {
               Certificación High Ticket Closing · Closwork
             </span>
             <h1 className="hero-title-in text-xl sm:text-2xl lg:text-[1.65rem] font-bold text-white leading-snug">
-              Te formamos como Closer High Ticket para que generes entre{' '}
-              <span className="text-white">$2,000 y $6,000 USD al mes</span> en 90 días. Si no logramos conectarte con
-              una empresa, te devolvemos el 100% de tu inversión y, además, otros{' '}
-              <span className="text-white">$200 USD</span> por hacerte perder el tiempo.
+              <span className="block">Cierra ventas High Ticket desde tu casa.</span>
+              <span className="block mt-2 sm:mt-3">
+                Nosotros te formamos y te conectamos con la empresa.
+              </span>
             </h1>
+            <p className="text-white/90 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+              Programa de 90 días para facturar entre{' '}
+              <span className="text-white font-semibold">$2,000 y $6,000 USD</span> al mes en comisiones.
+              Hispanohablantes, sin experiencia previa.
+            </p>
+            <div
+              className="flex items-start sm:items-center justify-center gap-3 text-left sm:text-center max-w-xl mx-auto rounded-2xl border border-white/20 bg-white/[0.08] px-4 py-3.5 shadow-sm shadow-black/10"
+              role="note"
+            >
+              <Shield className="h-5 w-5 shrink-0 text-[var(--primary)] mt-0.5 sm:mt-0" aria-hidden />
+              <p className="text-sm sm:text-[0.9375rem] text-white/95 leading-snug">
+                <span className="font-semibold text-white">Garantía:</span> si no te conectamos con una empresa,
+                <br />
+                te devolvemos el 100% + <span className="text-white font-semibold">$200 USD</span>.
+              </p>
+            </div>
             <p className="text-white/80 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
               Dos pasos: mira el video y elige tu horario en el calendario. Sin presión.
             </p>
