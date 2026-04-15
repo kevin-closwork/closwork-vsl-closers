@@ -117,9 +117,10 @@ function App() {
               Certificación High Ticket Closing · Closwork
             </span>
             <h1 className="hero-title-in text-xl sm:text-2xl lg:text-[1.65rem] font-bold text-white leading-snug">
-              Te formamos como closer High Ticket y te conectamos con empresas para que generes entre{' '}
-              <span className="text-white">$2,000 y $6,000 USD al mes</span> en menos de 90 días. Si no lo logramos,
-              devolvemos el 100% de tu inversión y te damos <span className="text-white">$200 USD</span> por tu tiempo.
+              Te formamos como Closer High Ticket para que generes entre{' '}
+              <span className="text-white">$2,000 y $6,000 USD al mes</span> en 90 días. Si no logramos conectarte con
+              una empresa, te devolvemos el 100% de tu inversión y, además, otros{' '}
+              <span className="text-white">$200 USD</span> por hacerte perder el tiempo.
             </h1>
             <p className="text-white/80 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
               Dos pasos: mira el video y elige tu horario en el calendario. Sin presión.
