@@ -128,9 +128,6 @@ function App() {
               <span className="text-white font-semibold">$2,000 y $6,000 USD</span> al mes en comisiones.
               Hispanohablantes, sin experiencia previa.
             </p>
-            <p className="text-white/80 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
-              Dos pasos: mira el video y elige tu horario en el calendario. Sin presión.
-            </p>
           </div>
 
           {/* Paso 1 */}
