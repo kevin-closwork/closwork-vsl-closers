@@ -3,8 +3,8 @@ import { Play } from 'lucide-react'
 import { ensureWistiaEmbedModule } from '../lib/wistiaPlayer'
 import { trackVslViewContent } from '../lib/pixel'
 
-const MEDIA_ID = 'uwfdvzk86j'
-const ASPECT = '1.7712177121771218'
+const MEDIA_ID = 'ia9vl5n52r'
+const ASPECT = '1.7777777777777777'
 const SWATCH_URL = `https://fast.wistia.com/embed/medias/${MEDIA_ID}/swatch`
 
 export default function WistiaHeroFacade({ onPlay }) {
