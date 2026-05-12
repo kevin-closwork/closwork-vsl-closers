@@ -1,6 +1,7 @@
-import { useEffect } from 'react'
+import { useEffect, useState, createElement } from 'react'
 import { Check, Quote } from 'lucide-react'
 import { trackScheduleOnce } from './lib/meta-capi'
+import { ensureWistiaPlayerJs, ensureWistiaEmbedModule } from './lib/wistiaPlayer'
 import WistiaTestimonialGrid from './components/WistiaTestimonialGrid.jsx'
 
 const TESTIMONIOS_EMPRESAS = [
@@ -15,9 +16,30 @@ const TESTIMONIOS_CLOSERS = [
   { id: 'z6cqho9fgw', aspect: '1.7777777777777777' },
 ]
 
+const TESTIGO_MEDIA_ID = '7hwf033hh0'
+const TESTIGO_ASPECT = '1.7777777777777777'
+
 export default function ThankYouPage() {
+  const [testigoReady, setTestigoReady] = useState(false)
+
   useEffect(() => {
     trackScheduleOnce()
+  }, [])
+
+  useEffect(() => {
+    let cancelled = false
+    ;(async () => {
+      try {
+        await ensureWistiaPlayerJs()
+        await ensureWistiaEmbedModule(TESTIGO_MEDIA_ID)
+        if (!cancelled) setTestigoReady(true)
+      } catch {
+        if (!cancelled) setTestigoReady(true)
+      }
+    })()
+    return () => {
+      cancelled = true
+    }
   }, [])
 
   return (
@@ -52,6 +74,17 @@ export default function ThankYouPage() {
               <li>¿Qué has intentado antes para mejorar tus ingresos y por qué no funcionó?</li>
               <li>¿Qué te impediría tomar una decisión hoy si el programa encaja con lo que buscas?</li>
             </ol>
+          </div>
+          <div className="mb-12 w-full rounded-2xl border border-[var(--border)] overflow-hidden shadow-sm bg-[var(--background-subtle)]">
+            {testigoReady ? (
+              createElement('wistia-player', {
+                'media-id': TESTIGO_MEDIA_ID,
+                aspect: TESTIGO_ASPECT,
+                className: 'w-full block',
+              })
+            ) : (
+              <div className="aspect-video bg-slate-100/80 animate-pulse" aria-hidden />
+            )}
           </div>
           <p className="text-[var(--text-secondary)] italic mb-16">
             Nos vemos pronto. — Andrés Guauque · Closwork
