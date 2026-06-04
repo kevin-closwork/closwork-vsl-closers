@@ -16,8 +16,18 @@ const TESTIMONIOS_CLOSERS = [
   { id: 'z6cqho9fgw', aspect: '1.7777777777777777' },
 ]
 
-const TESTIGO_MEDIA_ID = '7hwf033hh0'
-const TESTIGO_ASPECT = '1.7777777777777777'
+const TESTIGOS_DESTACADOS = [
+  {
+    id: '7rfq990019',
+    aspect: '1.7777777777777777',
+    title: 'Mira lo que dicen sobre el programa',
+  },
+  {
+    id: '7hwf033hh0',
+    aspect: '1.7777777777777777',
+    title: 'Mira lo que dice Claudia sobre el programa',
+  },
+]
 
 export default function ThankYouPage() {
   const [testigoReady, setTestigoReady] = useState(false)
@@ -31,7 +41,7 @@ export default function ThankYouPage() {
     ;(async () => {
       try {
         await ensureWistiaPlayerJs()
-        await ensureWistiaEmbedModule(TESTIGO_MEDIA_ID)
+        await Promise.all(TESTIGOS_DESTACADOS.map((t) => ensureWistiaEmbedModule(t.id)))
         if (!cancelled) setTestigoReady(true)
       } catch {
         if (!cancelled) setTestigoReady(true)
@@ -75,22 +85,24 @@ export default function ThankYouPage() {
               <li>¿Qué te impediría tomar una decisión hoy si el programa encaja con lo que buscas?</li>
             </ol>
           </div>
-          <div className="mb-12 w-full">
-            <h3 className="text-left text-xl font-bold text-[var(--secondary)] mb-4">
-              Mira lo que dice Claudia sobre el programa
-            </h3>
-            <div className="rounded-2xl border border-[var(--border)] overflow-hidden shadow-sm bg-[var(--background-subtle)]">
-              {testigoReady ? (
-                createElement('wistia-player', {
-                  'media-id': TESTIGO_MEDIA_ID,
-                  aspect: TESTIGO_ASPECT,
-                  className: 'w-full block',
-                })
-              ) : (
-                <div className="aspect-video bg-slate-100/80 animate-pulse" aria-hidden />
-              )}
+          {TESTIGOS_DESTACADOS.map((testigo) => (
+            <div key={testigo.id} className="mb-12 w-full">
+              <h3 className="text-left text-xl font-bold text-[var(--secondary)] mb-4">
+                {testigo.title}
+              </h3>
+              <div className="rounded-2xl border border-[var(--border)] overflow-hidden shadow-sm bg-[var(--background-subtle)]">
+                {testigoReady ? (
+                  createElement('wistia-player', {
+                    'media-id': testigo.id,
+                    aspect: testigo.aspect,
+                    className: 'w-full block',
+                  })
+                ) : (
+                  <div className="aspect-video bg-slate-100/80 animate-pulse" aria-hidden />
+                )}
+              </div>
             </div>
-          </div>
+          ))}
           <p className="text-[var(--text-secondary)] italic mb-16">
             Nos vemos pronto. — Andrés Guauque · Closwork
           </p>
