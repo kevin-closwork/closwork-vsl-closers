@@ -14,6 +14,7 @@ const TESTIMONIOS_CLOSERS = [
   { id: '2v79098752', aspect: '1.7843866171003717' },
   { id: '5ydnmq4z0y', aspect: '1.7777777777777777' },
   { id: 'z6cqho9fgw', aspect: '1.7777777777777777' },
+  { id: 'qwpaukexqm', aspect: '2.1442953020134228' },
 ]
 
 const TESTIGOS_DESTACADOS = [
