@@ -14,14 +14,17 @@ const TESTIMONIOS_CLOSERS = [
   { id: '2v79098752', aspect: '1.7843866171003717' },
   { id: '5ydnmq4z0y', aspect: '1.7777777777777777' },
   { id: 'z6cqho9fgw', aspect: '1.7777777777777777' },
-  { id: 'qwpaukexqm', aspect: '2.1442953020134228' },
 ]
 
 const TESTIGOS_DESTACADOS = [
   {
+    id: 'qwpaukexqm',
+    aspect: '2.1524663677130045',
+    title: 'Mira lo que dicen sobre el programa',
+  },
+  {
     id: '7rfq990019',
     aspect: '1.7777777777777777',
-    title: 'Mira lo que dicen sobre el programa',
   },
   {
     id: '7hwf033hh0',
@@ -88,9 +91,11 @@ export default function ThankYouPage() {
           </div>
           {TESTIGOS_DESTACADOS.map((testigo) => (
             <div key={testigo.id} className="mb-12 w-full">
-              <h3 className="text-left text-xl font-bold text-[var(--secondary)] mb-4">
-                {testigo.title}
-              </h3>
+              {testigo.title ? (
+                <h3 className="text-left text-xl font-bold text-[var(--secondary)] mb-4">
+                  {testigo.title}
+                </h3>
+              ) : null}
               <div className="rounded-2xl border border-[var(--border)] overflow-hidden shadow-sm bg-[var(--background-subtle)]">
                 {testigoReady ? (
                   createElement('wistia-player', {
