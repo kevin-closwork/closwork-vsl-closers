@@ -35,8 +35,28 @@ function App() {
   return (
     <div className="min-h-screen">
       <style>{`
-        @keyframes heroTitleIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-        .hero-title-in { animation: heroTitleIn 0.45s ease-out forwards; }
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(18px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes softPulse {
+          0%, 100% { opacity: 0.28; transform: scale(1); }
+          50% { opacity: 0.4; transform: scale(1.04); }
+        }
+        .anim-fade-up {
+          opacity: 0;
+          animation: fadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        .anim-delay-1 { animation-delay: 0.08s; }
+        .anim-delay-2 { animation-delay: 0.2s; }
+        .anim-delay-3 { animation-delay: 0.34s; }
+        .anim-delay-4 { animation-delay: 0.48s; }
+        .anim-delay-5 { animation-delay: 0.62s; }
+        .bg-orb-pulse { animation: softPulse 8s ease-in-out infinite; }
+        @media (prefers-reduced-motion: reduce) {
+          .anim-fade-up { opacity: 1; animation: none; }
+          .bg-orb-pulse { animation: none; }
+        }
       `}</style>
 
       <header
@@ -73,29 +93,33 @@ function App() {
           }}
         />
         <div className="absolute inset-0 pointer-events-none opacity-30">
-          <div className="absolute -top-24 -left-24 w-[28rem] h-[28rem] rounded-full bg-[var(--primary)] blur-[100px]" />
+          <div className="bg-orb-pulse absolute -top-24 -left-24 w-[28rem] h-[28rem] rounded-full bg-[var(--primary)] blur-[100px]" />
           <div className="absolute bottom-0 right-0 w-[32rem] h-[32rem] rounded-full bg-[var(--primary-glow)] blur-[120px] opacity-40" />
         </div>
 
-        <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14 space-y-10">
-          <div className="text-center space-y-4">
-            <span className="inline-flex px-3 py-1 rounded-full bg-white/15 text-white/95 text-xs font-medium">
+        <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16 space-y-10">
+          <div className="text-center space-y-5 sm:space-y-6">
+            <span className="anim-fade-up anim-delay-1 inline-flex px-3.5 py-1.5 rounded-full bg-white/12 ring-1 ring-white/20 text-white/90 text-[11px] sm:text-xs font-semibold tracking-[0.08em] uppercase">
               Certificación High Ticket Closing · Closwork
             </span>
-            <h1 className="hero-title-in text-2xl sm:text-3xl lg:text-[1.9rem] font-bold text-white leading-snug">
-              <span className="block">Cómo entrar al mundo del High Ticket Closing en 90 días</span>
-              <span className="block mt-2 sm:mt-3">
-                Accede a oportunidades reales con empresas que ya están contratando closers en México
-              </span>
+
+            <h1 className="anim-fade-up anim-delay-2 text-[1.65rem] sm:text-4xl lg:text-[2.65rem] font-extrabold text-white tracking-tight leading-[1.15] max-w-2xl mx-auto">
+              Cómo entrar al mundo del High Ticket Closing en{' '}
+              <span className="text-[var(--primary-glow)]">90 días</span>
             </h1>
-            <p className="text-white/90 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+
+            <p className="anim-fade-up anim-delay-3 text-base sm:text-xl text-white/90 font-medium leading-snug max-w-xl mx-auto">
+              Accede a oportunidades reales con empresas que ya están contratando closers en México
+            </p>
+
+            <p className="anim-fade-up anim-delay-4 text-sm sm:text-base text-white/70 leading-relaxed max-w-lg mx-auto">
               Programa guiado donde te formamos, te acompañamos y te conectamos con el mercado
               {' — '}
               incluso si empiezas desde cero.
             </p>
           </div>
 
-          <div className="pt-2">
+          <div className="anim-fade-up anim-delay-5 pt-1">
             <WistiaHeroFacade />
           </div>
         </div>
