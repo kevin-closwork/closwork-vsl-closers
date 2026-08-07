@@ -19,7 +19,7 @@
   --destructive: #ef4444;
 
   /* Gradientes */
-  --gradient-hero: linear-gradient(135deg, #003976 0%, #4aab6f 100%);
+  --gradient-hero: linear-gradient(165deg, #002850 0%, #003976 40%, #0a4a6e 70%, #0d5c52 100%);
   --gradient-primary: linear-gradient(135deg, #4aab6f, #5bb87d);
   --gradient-secondary: linear-gradient(135deg, #003976, #1a4a7a);
   --gradient-background: linear-gradient(180deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
