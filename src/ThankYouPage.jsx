@@ -5,13 +5,48 @@ import { ensureWistiaPlayerJs, ensureWistiaEmbedModule } from './lib/wistiaPlaye
 import { useInViewOnce } from './hooks/useInViewOnce'
 
 const VIDEOS_DESTACADOS = [
-  { id: 'wpdtadch0z', aspect: '1.7777777777777777' },
-  { id: 'qwpaukexqm', aspect: '2.1524663677130045' },
-  { id: '7rfq990019', aspect: '1.7777777777777777' },
-  { id: '7hwf033hh0', aspect: '1.7777777777777777' },
-  { id: '2v79098752', aspect: '1.7843866171003717' },
-  { id: '5ydnmq4z0y', aspect: '1.7777777777777777' },
-  { id: 'z6cqho9fgw', aspect: '1.7777777777777777' },
+  {
+    id: 'wpdtadch0z',
+    aspect: '1.7777777777777777',
+    name: 'Yamel',
+    quote: 'De trabajar en un sector tradicional a trabajar como closer',
+  },
+  {
+    id: 'qwpaukexqm',
+    aspect: '2.1524663677130045',
+    name: 'Andrés Rubio',
+    quote: 'Vendía de todo pero no había encontrado una habilidad para monetizar',
+  },
+  {
+    id: '7rfq990019',
+    aspect: '1.7777777777777777',
+    name: 'Eduardo',
+    quote: 'Pagó por otra formación que no le dio valor en su momento y nos escogió para formarse como closer',
+  },
+  {
+    id: '7hwf033hh0',
+    aspect: '1.7777777777777777',
+    name: 'Claudia',
+    quote: 'Más de 25 años en ventas para encontrar un lugar como closer high ticket en 1 semana',
+  },
+  {
+    id: '2v79098752',
+    aspect: '1.7843866171003717',
+    name: 'Wendy',
+    quote: 'Como madre aprovecha el tiempo para trabajar como closer',
+  },
+  {
+    id: '5ydnmq4z0y',
+    aspect: '1.7777777777777777',
+    name: 'Andrea',
+    quote: 'Sin experiencia ejerciendo como closer',
+  },
+  {
+    id: 'z6cqho9fgw',
+    aspect: '1.7777777777777777',
+    name: 'Fernando',
+    quote: 'Cómo pudimos ubicarlo laboralmente en un nuevo sector para él',
+  },
 ]
 
 const VIDEOS_EMPRESAS = [
@@ -119,10 +154,8 @@ function VideoCard({ video, ready, index = 0, large = false }) {
   return (
     <div
       ref={ref}
-      className={`rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-xl hover:-translate-y-1.5 ${
-        large
-          ? 'shadow-lg ring-1 ring-black/5'
-          : 'shadow-sm border border-[var(--border)] bg-[var(--background-subtle)]'
+      className={`group flex h-full flex-col rounded-2xl overflow-hidden bg-white transition-all duration-500 hover:shadow-xl hover:-translate-y-1.5 ${
+        large ? 'shadow-lg ring-1 ring-black/5' : 'shadow-sm border border-[var(--border)]'
       } ${visible ? 'slide-up' : 'opacity-0'}`}
       style={{ animationDelay: `${index * 100}ms` }}
     >
@@ -137,6 +170,36 @@ function VideoCard({ video, ready, index = 0, large = false }) {
           <div className="w-12 h-12 rounded-full bg-white/80 flex items-center justify-center shadow-sm">
             <Play className="w-5 h-5 text-slate-400 ml-0.5" />
           </div>
+        </div>
+      )}
+
+      {video.name && (
+        <div className={`flex flex-1 flex-col ${large ? 'px-6 py-6 sm:px-8' : 'px-5 py-5'}`}>
+          <div className="flex items-center gap-2.5">
+            <div
+              className={`shrink-0 rounded-full bg-[var(--primary)]/10 flex items-center justify-center ${
+                large ? 'w-9 h-9' : 'w-8 h-8'
+              }`}
+            >
+              <span className={`text-[var(--primary)] font-bold ${large ? 'text-sm' : 'text-xs'}`}>
+                {video.name.charAt(0)}
+              </span>
+            </div>
+            <h3
+              className={`font-semibold text-[var(--secondary)] tracking-tight ${
+                large ? 'text-lg sm:text-xl' : 'text-base'
+              }`}
+            >
+              {video.name}
+            </h3>
+          </div>
+          <p
+            className={`mt-3 text-[var(--text-secondary)] leading-relaxed ${
+              large ? 'text-sm sm:text-base' : 'text-sm'
+            }`}
+          >
+            {video.quote}
+          </p>
         </div>
       )}
     </div>
@@ -167,11 +230,11 @@ function VideoSection({ videos, allIds }) {
 
   return (
     <div ref={wrapRef}>
-      <div className="max-w-4xl mx-auto mb-8">
+      <div className="max-w-3xl mx-auto mb-10 sm:mb-12">
         <VideoCard video={featured} ready={ready} large />
       </div>
       {rest.length > 0 && (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 items-stretch">
           {rest.map((v, i) => (
             <VideoCard key={v.id} video={v} ready={ready} index={i + 1} />
           ))}
