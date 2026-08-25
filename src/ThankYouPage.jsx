@@ -4,55 +4,51 @@ import { trackScheduleOnce } from './lib/meta-capi'
 import { ensureWistiaPlayerJs, ensureWistiaEmbedModule } from './lib/wistiaPlayer'
 import { useInViewOnce } from './hooks/useInViewOnce'
 
+// Todos los reproductores usan 16:9 para que las tarjetas queden alineadas en la grilla.
+const CARD_ASPECT = '1.7777777777777777'
+
 const VIDEOS_DESTACADOS = [
   {
     id: 'wpdtadch0z',
-    aspect: '1.7777777777777777',
     name: 'Yamel',
     quote: 'De trabajar en un sector tradicional a trabajar como closer',
   },
   {
     id: 'qwpaukexqm',
-    aspect: '2.1524663677130045',
     name: 'Andrés Rubio',
     quote: 'Vendía de todo pero no había encontrado una habilidad para monetizar',
   },
   {
     id: '7rfq990019',
-    aspect: '1.7777777777777777',
     name: 'Eduardo',
     quote: 'Pagó por otra formación que no le dio valor en su momento y nos escogió para formarse como closer',
   },
   {
     id: '7hwf033hh0',
-    aspect: '1.7777777777777777',
     name: 'Claudia',
     quote: 'Más de 25 años en ventas para encontrar un lugar como closer high ticket en 1 semana',
   },
   {
     id: '2v79098752',
-    aspect: '1.7843866171003717',
     name: 'Wendy',
     quote: 'Como madre aprovecha el tiempo para trabajar como closer',
   },
   {
     id: '5ydnmq4z0y',
-    aspect: '1.7777777777777777',
     name: 'Andrea',
     quote: 'Sin experiencia ejerciendo como closer',
   },
   {
     id: 'z6cqho9fgw',
-    aspect: '1.7777777777777777',
     name: 'Fernando',
     quote: 'Cómo pudimos ubicarlo laboralmente en un nuevo sector para él',
   },
 ]
 
 const VIDEOS_EMPRESAS = [
-  { id: '22xpkuadcy', aspect: '1.7843866171003717' },
-  { id: 'wg27x4kya7', aspect: '1.7843866171003717' },
-  { id: 'rd06ag3xmc', aspect: '1.7843866171003717' },
+  { id: '22xpkuadcy' },
+  { id: 'wg27x4kya7' },
+  { id: 'rd06ag3xmc' },
 ]
 
 const CONFETTI_COLORS = ['#6C63FF', '#FF6584', '#43E97B', '#F7971E', '#38F9D7', '#FAD961', '#A18CD1']
@@ -137,7 +133,7 @@ function Confetti() {
   )
 }
 
-function VideoCard({ video, ready, index = 0, large = false }) {
+function VideoCard({ video, ready, index = 0 }) {
   const [visible, setVisible] = useState(false)
   const ref = useRef(null)
 
@@ -154,50 +150,36 @@ function VideoCard({ video, ready, index = 0, large = false }) {
   return (
     <div
       ref={ref}
-      className={`group flex h-full flex-col rounded-2xl overflow-hidden bg-white transition-all duration-500 hover:shadow-xl hover:-translate-y-1.5 ${
-        large ? 'shadow-lg ring-1 ring-black/5' : 'shadow-sm border border-[var(--border)]'
-      } ${visible ? 'slide-up' : 'opacity-0'}`}
-      style={{ animationDelay: `${index * 100}ms` }}
+      className={`group flex h-full flex-col overflow-hidden rounded-xl bg-white border border-[var(--border)] shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${
+        visible ? 'slide-up' : 'opacity-0'
+      }`}
+      style={{ animationDelay: `${index * 80}ms` }}
     >
-      {ready ? (
-        createElement('wistia-player', {
-          'media-id': video.id,
-          aspect: video.aspect,
-          className: 'w-full block',
-        })
-      ) : (
-        <div className="aspect-video bg-gradient-to-br from-slate-100 to-slate-50 animate-pulse flex items-center justify-center">
-          <div className="w-12 h-12 rounded-full bg-white/80 flex items-center justify-center shadow-sm">
-            <Play className="w-5 h-5 text-slate-400 ml-0.5" />
+      <div className="bg-slate-900">
+        {ready ? (
+          createElement('wistia-player', {
+            'media-id': video.id,
+            aspect: CARD_ASPECT,
+            className: 'w-full block',
+          })
+        ) : (
+          <div className="aspect-video bg-gradient-to-br from-slate-100 to-slate-50 animate-pulse flex items-center justify-center">
+            <div className="w-11 h-11 rounded-full bg-white/80 flex items-center justify-center shadow-sm">
+              <Play className="w-4 h-4 text-slate-400 ml-0.5" />
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
 
       {video.name && (
-        <div className={`flex flex-1 flex-col ${large ? 'px-6 py-6 sm:px-8' : 'px-5 py-5'}`}>
-          <div className="flex items-center gap-2.5">
-            <div
-              className={`shrink-0 rounded-full bg-[var(--primary)]/10 flex items-center justify-center ${
-                large ? 'w-9 h-9' : 'w-8 h-8'
-              }`}
-            >
-              <span className={`text-[var(--primary)] font-bold ${large ? 'text-sm' : 'text-xs'}`}>
-                {video.name.charAt(0)}
-              </span>
-            </div>
-            <h3
-              className={`font-semibold text-[var(--secondary)] tracking-tight ${
-                large ? 'text-lg sm:text-xl' : 'text-base'
-              }`}
-            >
+        <div className="flex flex-1 flex-col gap-2 px-5 py-4 border-t border-[var(--border)]">
+          <div className="flex items-center gap-2">
+            <span className="w-1 h-4 rounded-full bg-[var(--primary)] shrink-0" />
+            <h3 className="text-[15px] font-semibold text-[var(--secondary)] tracking-tight">
               {video.name}
             </h3>
           </div>
-          <p
-            className={`mt-3 text-[var(--text-secondary)] leading-relaxed ${
-              large ? 'text-sm sm:text-base' : 'text-sm'
-            }`}
-          >
+          <p className="text-[13.5px] text-[var(--text-secondary)] leading-relaxed">
             {video.quote}
           </p>
         </div>
@@ -225,21 +207,14 @@ function VideoSection({ videos, allIds }) {
     return () => { cancelled = true }
   }, [inView, ready])
 
-  const featured = videos[0]
-  const rest = videos.slice(1)
-
   return (
-    <div ref={wrapRef}>
-      <div className="max-w-3xl mx-auto mb-10 sm:mb-12">
-        <VideoCard video={featured} ready={ready} large />
-      </div>
-      {rest.length > 0 && (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 items-stretch">
-          {rest.map((v, i) => (
-            <VideoCard key={v.id} video={v} ready={ready} index={i + 1} />
-          ))}
+    // Flex wrap en lugar de grid para que la última fila incompleta quede centrada.
+    <div ref={wrapRef} className="flex flex-wrap justify-center gap-6">
+      {videos.map((v, i) => (
+        <div key={v.id} className="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]">
+          <VideoCard video={v} ready={ready} index={i} />
         </div>
-      )}
+      ))}
     </div>
   )
 }
