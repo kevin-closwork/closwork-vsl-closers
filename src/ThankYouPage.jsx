@@ -43,6 +43,30 @@ const VIDEOS_DESTACADOS = [
     name: 'Fernando',
     quote: 'Cómo pudimos ubicarlo laboralmente en un nuevo sector para él',
   },
+  {
+    id: '4d4alu4rpb',
+    quote: 'De nunca haber vendido a formarse como closer',
+  },
+  {
+    id: 'jkxz8lv5to',
+    quote: 'Ya había comprado otra formación pero escogió The Closer Makers',
+  },
+  {
+    id: 'drd55lylb2',
+    quote: 'En ventas toda la vida a trabajar como closer en algo que le apasiona',
+  },
+  {
+    id: '3g936zdfkp',
+    quote: 'De vendedor de mostrador a closer high ticket',
+  },
+  {
+    id: 'cqs5v45e8h',
+    quote: 'Trabajaba en inmobiliaria y quiere expandir su alcance comercial',
+  },
+  {
+    id: 'jvb0aop0p0',
+    quote: 'De call center a formarse como closer high ticket',
+  },
 ]
 
 const VIDEOS_EMPRESAS = [
@@ -171,17 +195,21 @@ function VideoCard({ video, ready, index = 0 }) {
         )}
       </div>
 
-      {video.name && (
+      {(video.name || video.quote) && (
         <div className="flex flex-1 flex-col gap-2 px-5 py-4 border-t border-[var(--border)]">
-          <div className="flex items-center gap-2">
-            <span className="w-1 h-4 rounded-full bg-[var(--primary)] shrink-0" />
-            <h3 className="text-[15px] font-semibold text-[var(--secondary)] tracking-tight">
-              {video.name}
-            </h3>
-          </div>
-          <p className="text-[13.5px] text-[var(--text-secondary)] leading-relaxed">
-            {video.quote}
-          </p>
+          {video.name && (
+            <div className="flex items-center gap-2">
+              <span className="w-1 h-4 rounded-full bg-[var(--primary)] shrink-0" />
+              <h3 className="text-[15px] font-semibold text-[var(--secondary)] tracking-tight">
+                {video.name}
+              </h3>
+            </div>
+          )}
+          {video.quote && (
+            <p className="text-[13.5px] text-[var(--text-secondary)] leading-relaxed">
+              {video.quote}
+            </p>
+          )}
         </div>
       )}
     </div>
